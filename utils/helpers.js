@@ -15,7 +15,7 @@ module.exports = {
     return date.toLocaleTimeString();
   },
   format_date: (date) => {
-    return date.toLocaleDateStrin();
+    return date.toLocaleDateString();
   },
 };
 
