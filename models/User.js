@@ -31,7 +31,6 @@ User.init(
       validate: {
         isEmail: true,
       },
-    
     },
       phone_number: {
         type: DataTypes.INTEGER,
@@ -55,12 +54,14 @@ User.init(
         return newUserData;
       },
     },
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'user',
+  sequelize,
+  timestamps: false,
+  freezeTableName: true,
+  underscored: true,
+  modelName: 'user',
   }
 );
 
 module.exports = User;
+
+// We worked on this page together.
