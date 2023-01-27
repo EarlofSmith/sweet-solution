@@ -1,11 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 const helpers = require('./utils/helpers');
 
-
 class Order extends Model {}
-
 
 Order.init(
     {
@@ -59,3 +56,5 @@ Order.init(
 );
 
 module.exports = Order
+
+// We worked on this page together.

@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class Category extends Model {}
@@ -24,8 +23,14 @@ Category.init(
                 key: 'id', 
             }
         },
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'category',
     }
-)
-
+);
 
 module.exports = Category; 
+
+// We worked on this page together.
