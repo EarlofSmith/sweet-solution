@@ -1,0 +1,55 @@
+const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
+const sequelize = require('../config/connection');
+
+class Product extends Model {}
+
+Product.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+          },
+          product_name: {
+            type:DataTypes.STRING,
+            allowNull: false,
+          },
+          category: {
+            type: DataTypes.STRING,
+            references: {
+                model: 'category',
+                key: 'id'
+            }
+          },
+          price_per: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+            validate: {
+                isNumeric: true,
+                isDecimal: true,
+            }
+          },
+          special_instructions: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+          },
+          reviews: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+            references: {
+                model: 'reviews',
+                key: 'id'
+            }
+          },
+          sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'products',
+    }
+);
+
+module.exports = Product;
+// we worked on this page together
