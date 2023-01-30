@@ -29,7 +29,7 @@ Order.init(
             }
           },
           due_date: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DATEONLY,
             allowNull: false,
             // validate: {
             //     isAfter: 
@@ -40,7 +40,7 @@ Order.init(
             allowNull: false,
           },
           total_price: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DECIMAL,
             allowNull: false,
           },
           special_instructions: {
@@ -55,6 +55,6 @@ Order.init(
     }
 );
 
-module.exports = Order
+module.exports = Order;
 
 // We worked on this page together.
