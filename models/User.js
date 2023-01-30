@@ -32,12 +32,12 @@ User.init(
         isEmail: true,
       },
     },
-      phone_number: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        validate: {
-          isNumeric: true,
-        }
+    phone_number: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        isNumeric: true,
+      }
       },
     password: {
       type: DataTypes.STRING,
