@@ -5,7 +5,6 @@ const Product = require('./Product');   // for the "Products" table data model a
 const User = require('./User');  // for the "Users" table data model association
 const Order = require('./Order');  // for the "Orders" table data model association
 const Review = require('./Review');  // for the "Reviews" table data model association
-const orderDetail = require('./Order_Detail'); 
 const Order_Detail = require('./Order_Detail');
 
 
@@ -75,6 +74,14 @@ Order.belongsTo(User, {
 Order.belongsToMany(Product, {
   through: Order_Detail,
   foreignKey: 'order_id',
+});
+
+Order_Detail.belongsTo(Order, {
+  foreignKey: 'order_id'
+});
+
+Order_Detail.hasMany(Order, {
+  foreignKey: 'order_id'
 });
   
 
