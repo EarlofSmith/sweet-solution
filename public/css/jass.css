@@ -8,6 +8,7 @@
 
 body {
   background-color: var(--light-background);
+  color: var(--dark-brown); 
 }
 
 .btn {
@@ -21,4 +22,10 @@ h3 {
 
 .nav-link {
   color: var(--dark-brown); 
+}
+
+#aside {
+  background-color: var(--light-blue);
+  color: var(--grey);
+  border-radius: 10px;
 }
