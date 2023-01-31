@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const helpers = require('./utils/helpers');
+// const helpers = require('./utils/helpers');
 
 class Order extends Model {}
 
@@ -47,6 +47,8 @@ Order.init(
             type: DataTypes.TEXT,
             allowNull: true
           },
+        },
+        {
           sequelize,
     timestamps: false,
     freezeTableName: true,

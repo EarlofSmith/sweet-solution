@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Previous_Order extends Model {}
+class Order_Detail extends Model {}
 
-Previous_Order.init(
+Order_Detail.init(
     {
         id: {
             type: DataTypes.INTEGER, 
@@ -15,26 +15,28 @@ Previous_Order.init(
             type: DataTypes.INTEGER, 
             allowNull: true, 
             references: {
-                model: 'orders', 
+                model: 'order', 
                 key: 'id', 
             }, 
         }, 
-        user_id: {
+        product_id: {
             type: DataTypes.INTEGER, 
             allowNull: true, 
             references: {
-                model: 'user', 
+                model: 'product', 
                 key: 'id', 
             }, 
         }, 
+    }, 
+    {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'previous_order',
+    modelName: 'order_detail',
     }
 );
 
-module.exports = Previous_Order; 
+module.exports = Order_Detail; 
 
 // We worked on this page together.

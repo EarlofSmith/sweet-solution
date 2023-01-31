@@ -1,15 +1,15 @@
 {
-  "name": "template",
+  "name": "sweet solution",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "seed": "node seeds/seed.js"
+    "seed": "node seeds/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Team 3",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
