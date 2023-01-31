@@ -137,7 +137,7 @@ const productData = [
         price_per: 35.00
     },
     {
-        product_name: "pumpkin cheesecake (Vegan)", 
+        product_name: "cherry cheesecake (Vegan)", 
         category_id: 8, 
         price_per: 35.00
     },

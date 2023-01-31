@@ -19,10 +19,12 @@ Category.init(
             type: DataTypes.INTEGER, 
             allowNull: true, 
             references: {
-                model: 'products', 
+                model: 'product', 
                 key: 'id', 
             }
         },
+    }, 
+    {
     sequelize,
     timestamps: false,
     freezeTableName: true,

@@ -15,8 +15,8 @@ Product.init(
             type:DataTypes.STRING,
             allowNull: false,
           },
-          category: {
-            type: DataTypes.STRING,
+          category_id: {
+            type: DataTypes.INTEGER,
             references: {
                 model: 'category',
                 key: 'id'
@@ -34,14 +34,16 @@ Product.init(
             type: DataTypes.TEXT,
             allowNull: true,
           },
-          reviews: {
-            type: DataTypes.TEXT,
+          review_id: {
+            type: DataTypes.INTEGER,
             allowNull: true,
             references: {
-                model: 'reviews',
+                model: 'review',
                 key: 'id'
             }
           },
+        },
+        {
     sequelize,
     timestamps: false,
     freezeTableName: true,
