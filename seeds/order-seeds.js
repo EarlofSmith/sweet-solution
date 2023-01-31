@@ -3,7 +3,7 @@ const { Order } = require('../models');
 const orderData = [
   {
     "user_id": 1,
-    "product_id": [1, 4],
+    "product_id": 1,
     "due_date": 1-31-2024,
     "quantity": 2,
     "total_price": 12.50,
@@ -11,7 +11,7 @@ const orderData = [
   },
   {
     "user_id": 2,
-    "product_id": [1, 4, 7, 10, 13, 18, 23, 26],
+    "product_id": 3,
     "due_date": 2-14-2023,
     "quantity": 1,
     "total_price": 66.00,
@@ -19,7 +19,7 @@ const orderData = [
   },
   {
     "user_id": 3,
-    "product_id": [10, 13, 26],
+    "product_id": 10,
     "due_date": 2-13-2023,
     "quantity": 3,
     "total_price": 20.00,

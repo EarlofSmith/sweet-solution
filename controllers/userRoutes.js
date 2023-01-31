@@ -36,7 +36,7 @@ router.post('/login', auth, async (req, res) => {
 
 
 // GET all users
-router.get('/user', async (req, res) => {
+router.get('/user', auth, async (req, res) => {
   try {
     const userData = await User.findAll();
     if (!userData) {
@@ -51,7 +51,7 @@ router.get('/user', async (req, res) => {
 
 
 // GET one user
-router.get('/user/:id', async (req, res) => {
+router.get('/user/:id', auth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id);
     if (!userData) {
@@ -66,7 +66,7 @@ router.get('/user/:id', async (req, res) => {
 
 
 // POST create a new user
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   try {
     const userData = await User.create({
      //
@@ -79,23 +79,37 @@ router.post('/', async (req, res) => {
 
 
 // PUT update a user
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   try {
     const userData = await User.update(req.body, {
       where: {
         id: req.params.id,
       },
-      // Cancel user.
-      // Set "status" field to "Cancelled"
-      //
-      // Re-Activate user.
-      // Set "status" field to "Registered"
     });
     if (!userData[0]) {
       res.status(404).json({ message: 'No user with this id!' });
       return;
     }
     res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+// DELETE a user
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const userData = await User.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!userData[0]) {
+      res.status(404).json({ message: 'No user with this id!' });
+      return;
+    }
+    res.status(200).json( {message: 'User deleted.'} );
   } catch (err) {
     res.status(500).json(err);
   }

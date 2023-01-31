@@ -1,4 +1,4 @@
-const User = require('../../models/User');
+const User = require('../models/User');
 const userSeedData = require('./userSeedData.json');
 
 const seedUsers = () => User.bulkCreate(userSeedData)
