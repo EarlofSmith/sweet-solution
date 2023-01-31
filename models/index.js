@@ -3,7 +3,7 @@
 const Category = require('./Category');  // for the "Categories" table data model association
 const Product = require('./Products');   // for the "Products" table data model association
 const User = require('./User');  // for the "Users" table data model association
-const Order = require('./Orders');  // for the "Orders" table data model association
+const Order = require('./Order');  // for the "Orders" table data model association
 const Review = require('./Reviews');  // for the "Reviews" table data model association
 //const Previous_Order = require('./Previous_Order');  // for the "Previous_Orders" table data model association
   // Deleted table because of being not necessary

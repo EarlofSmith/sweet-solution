@@ -7,5 +7,5 @@ const seedAll = async () => {
   console.log('\n----- DATABASE SYNCED -----\n');
   await seedOrders();
   console.log('\n----- ORDERS SEEDED -----\n');
-
+  
 }
