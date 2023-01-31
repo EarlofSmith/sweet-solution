@@ -36,7 +36,7 @@ router.post('/login', auth, async (req, res) => {
 
 
 // GET all users
-router.get('/user', auth, async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const userData = await User.findAll();
     if (!userData) {
@@ -51,7 +51,7 @@ router.get('/user', auth, async (req, res) => {
 
 
 // GET one user
-router.get('/user/:id', auth, async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id);
     if (!userData) {

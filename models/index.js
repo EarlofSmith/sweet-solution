@@ -5,7 +5,7 @@ const Product = require('./Product');   // for the "Products" table data model a
 const User = require('./User');  // for the "Users" table data model association
 const Order = require('./Order');  // for the "Orders" table data model association
 const Review = require('./Review');  // for the "Reviews" table data model association
-const orderDetail = require('./Order_Detail'); 
+const Order_Detail = require('./Order_Detail');
 
 
 // "Categories" data/table relationships:
@@ -69,6 +69,14 @@ Order.belongsTo(User, {
 Order.belongsTo(Product, {
   foreignKey: 'order_id'
 });
+
+Order_Detail.belongsTo(Order, {
+  foreignKey: 'order_id'
+});
+
+Order_Detail.hasMany(Order, {
+  foreignKey: 'order_id'
+});
   
 
 
@@ -93,4 +101,4 @@ Review.belongsTo(Product, {
 // data models exports
 //
 
-module.exports = { User, Category, Order, orderDetail, Product, Review };
+module.exports = { User, Category, Order, Order_Detail, Product, Review };
