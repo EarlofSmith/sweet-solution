@@ -15,7 +15,7 @@ const Order_Detail = require('./Order_Detail');
 Category.belongsTo(Product, {
   foreignKey: 'category_id'
 });
-  
+
 
 
 // "Products" data/table relationships:
@@ -30,7 +30,8 @@ Product.hasMany(Review, {
 
 
 // for the many-to-many relationship with the "Orders" table
-Product.belongsTo(Order, {
+Product.belongsToMany(Order, {
+  through: Order_Detail,
   foreignKey: 'product_id'
 });  
 
@@ -59,6 +60,10 @@ User.hasMany(Review, {
 // "Orders" data/table relationships:
 //
 
+Order.hasMany(Order_Detail, {
+  foreignKey: 'order_id'
+})
+
 // for the many-to-one relationship with the "Users" table
 Order.belongsTo(User, {
   foreignKey: 'user_id'
@@ -66,8 +71,9 @@ Order.belongsTo(User, {
 });
 
 // for the many-to-many relationship with the "Products" table
-Order.belongsTo(Product, {
-  foreignKey: 'order_id'
+Order.belongsToMany(Product, {
+  through: Order_Detail,
+  foreignKey: 'order_id',
 });
 
 Order_Detail.belongsTo(Order, {
