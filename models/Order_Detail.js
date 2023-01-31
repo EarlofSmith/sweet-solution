@@ -5,28 +5,33 @@ class Order_Detail extends Model {}
 
 Order_Detail.init(
     {
-        id: {
-            type: DataTypes.INTEGER, 
-            allowNull: false, 
-            primaryKey: true, 
-            autoIncrement: true, 
-        }, 
-        order_id: {
-            type: DataTypes.INTEGER, 
-            allowNull: true, 
-            references: {
-                model: 'order', 
-                key: 'id', 
-            }, 
-        }, 
-        product_id: {
-            type: DataTypes.INTEGER, 
-            allowNull: true, 
-            references: {
-                model: 'product', 
-                key: 'id', 
-            }, 
-        }, 
+      id: {
+          type: DataTypes.INTEGER, 
+          allowNull: false, 
+          primaryKey: true, 
+          autoIncrement: true, 
+      }, 
+      order_id: {
+          type: DataTypes.INTEGER, 
+          allowNull: false, 
+          references: {
+              model: 'order', 
+              key: 'id', 
+          }, 
+      }, 
+      product_id: {
+          type: DataTypes.INTEGER, 
+          allowNull: true, 
+          references: {
+              model: 'product', 
+              key: 'id', 
+          },
+          defaultValue: 100 
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     }, 
     {
     sequelize,

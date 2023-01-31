@@ -6,54 +6,54 @@ class Order extends Model {}
 
 Order.init(
     {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-          },
-          user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'id',
-            }
-          },
-          product_id:{
-            type: DataTypes.INTEGER,
-            allowNull:false,
-            references: {
-                model: 'product',
-                key: 'id',
-            }
-          },
-          due_date: {
-            type: DataTypes.DATEONLY,
-            allowNull: false,
-            // validate: {
-            //     isAfter: 
-            // }
-          },
-          quantity: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-          },
-          total_price: {
-            type: DataTypes.DECIMAL,
-            allowNull: false,
-          },
-          special_instructions: {
-            type: DataTypes.TEXT,
-            allowNull: true
-          },
+      id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          primaryKey: true,
+          autoIncrement: true,
         },
-        {
-          sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'order',
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'user',
+            key: 'id',
+        }
+      },
+      product_id:{
+        type: DataTypes.INTEGER,
+        allowNull:false,
+        references: {
+            model: 'product',
+            key: 'id',
+        }
+      },
+      due_date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+        // validate: {
+        //     isAfter: 
+        // }
+      },
+      special_instructions: {
+        type: DataTypes.TEXT,
+        allowNull: true
+      },
+      // total_price: {
+      //   type: DataTypes.DECIMAL,
+      //   allowNull: false,
+      // },
+      
+
+      // refactor some of the table fields to put the appropriate data in.
+
+    },
+    {
+      sequelize,
+      timestamps: false,
+      freezeTableName: true,
+      underscored: true,
+      modelName: 'order',
     }
 );
 

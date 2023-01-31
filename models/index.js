@@ -6,6 +6,7 @@ const User = require('./User');  // for the "Users" table data model association
 const Order = require('./Order');  // for the "Orders" table data model association
 const Review = require('./Review');  // for the "Reviews" table data model association
 const orderDetail = require('./Order_Detail'); 
+const Order_Detail = require('./Order_Detail');
 
 
 // "Categories" data/table relationships:
@@ -15,7 +16,7 @@ const orderDetail = require('./Order_Detail');
 Category.belongsTo(Product, {
   foreignKey: 'category_id'
 });
-  
+
 
 
 // "Products" data/table relationships:
@@ -30,7 +31,8 @@ Product.hasMany(Review, {
 
 
 // for the many-to-many relationship with the "Orders" table
-Product.belongsTo(Order, {
+Product.belongsToMany(Order, {
+  through: Order_Detail,
   foreignKey: 'product_id'
 });  
 
@@ -59,6 +61,10 @@ User.hasMany(Review, {
 // "Orders" data/table relationships:
 //
 
+Order.hasMany(Order_Detail, {
+  foreignKey: 'order_id'
+})
+
 // for the many-to-one relationship with the "Users" table
 Order.belongsTo(User, {
   foreignKey: 'user_id'
@@ -66,8 +72,9 @@ Order.belongsTo(User, {
 });
 
 // for the many-to-many relationship with the "Products" table
-Order.belongsTo(Product, {
-  foreignKey: 'order_id'
+Order.belongsToMany(Product, {
+  through: Order_Detail,
+  foreignKey: 'order_id',
 });
   
 
@@ -93,4 +100,4 @@ Review.belongsTo(Product, {
 // data models exports
 //
 
-module.exports = { User, Category, Order, orderDetail, Product, Review };
+module.exports = { User, Category, Order, Order_Detail, Product, Review };
