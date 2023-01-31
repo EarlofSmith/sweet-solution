@@ -36,7 +36,7 @@ router.post('/login', auth, async (req, res) => {
 
 
 // GET all users
-router.get('/user', async, async (req, res) => {
+router.get('/user', async (req, res) => {
   try {
     const userData = await User.findAll();
     if (!userData) {
@@ -51,7 +51,7 @@ router.get('/user', async, async (req, res) => {
 
 
 // GET one user
-router.get('/user/:id', async, async (req, res) => {
+router.get('/user/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id);
     if (!userData) {
@@ -66,7 +66,7 @@ router.get('/user/:id', async, async (req, res) => {
 
 
 // POST create a new user
-router.post('/', async, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const userData = await User.create({
      //
@@ -79,7 +79,7 @@ router.post('/', async, async (req, res) => {
 
 
 // PUT update a user
-router.put('/:id', async, async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const userData = await User.update(req.body, {
       where: {

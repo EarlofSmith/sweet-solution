@@ -14,7 +14,7 @@ const { Model, DataTypes } = require('sequelize');
 
 // "Users" table seeding
 const User = require('../models/User');
-const userSeedData = require('./userSeedData.js');
+const userSeedData = require('./userSeed.js');
 
 const seedUsers = () => User.bulkCreate(userSeedData)
   .then(() => {

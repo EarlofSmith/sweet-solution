@@ -38,7 +38,7 @@ Product.init(
             type: DataTypes.TEXT,
             allowNull: true,
             references: {
-                model: 'reviews',
+                model: 'review',
                 key: 'id'
             }
           },
