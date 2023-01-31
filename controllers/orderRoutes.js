@@ -1,4 +1,4 @@
-const router = require('epxress').router;
+const router = require('express').Router();
 const { Order, User, Product } = ('../models')
 
 
