@@ -4,6 +4,11 @@ const bcrypt = require('bcrypt');
 const auth = require('../utils/auth');
 
 
+router.get('/login', async (req, res) => {
+
+  res.render('login',);
+});
+
 router.post('/login', auth, async (req, res) => {
     try {
         const userDb = await User.findOne({
