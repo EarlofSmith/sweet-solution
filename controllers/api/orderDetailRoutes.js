@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Order_Detail} = require('../models')
+const { Order_Detail} = require('../../models')
 
 
 // route to get all Order_Details

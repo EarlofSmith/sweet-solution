@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const userSeedData = require('./userSeedData.json');
 
-const seedUsers = () => User.bulkCreate(userSeedData)
+const seedUsers = () => User.bulkCreate(userSeedData, {individualHooks: true})
   // The user seed data is contained in an external file for the conceivable situation of it
   // becoming a very-long list that would reduce the simplicity/organization of this related 
   // processing file.

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Order, User, Product } = require('../models');
+const { Order, User, Product } = require('../../models')
 
 
 // route to get all orders
