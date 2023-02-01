@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const User = require('../models/User');
+const User = require('../../models/User');
 const bcrypt = require('bcrypt');
-const auth = require('../utils/auth');
+const auth = require('../../utils/Auth');
 
 
 router.get('/login', async (req, res) => {
@@ -9,7 +9,7 @@ router.get('/login', async (req, res) => {
   res.render('login',);
 });
 
-router.post('/login', auth, async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         const userDb = await User.findOne({
             where: {
@@ -23,7 +23,9 @@ router.post('/login', auth, async (req, res) => {
             return;
         }
 
-        const validPassword = await bcrypt.compare(req.body.password, userDb.password);
+        const validPassword = userDb.checkAuth(req.body.password);
+         console.log(validPassword);
+         console.log(userDb.password)
         if (!validPassword) {
             res.status(404).json({message: 'Your password is incorrect. Please use a registered email, or create and account.'});
             return; 
@@ -69,10 +71,14 @@ router.get('/:id', auth, async (req, res) => {
 
 
 // POST create a new user
-router.post('/', auth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const userData = await User.create({
-     //
+     first_name: req.body.first_name,
+     last_name: req.body.last_name,
+     email: req.body.email,
+     phone_number: req.body.phone_number,
+     password: req.body.password,
     });
     res.status(200).json(userData);
   } catch (err) {
