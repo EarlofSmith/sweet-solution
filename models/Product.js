@@ -30,7 +30,7 @@ Product.init(
                 isDecimal: true,
             }
           },
-          special_instructions: {
+          description: {
             type: DataTypes.TEXT,
             allowNull: true,
           },
@@ -42,6 +42,10 @@ Product.init(
                 key: 'id'
             }
           },
+          //image_file: {
+          //  type: DataTypes.STRING,
+          //  allowNull: true,
+          //},
         },
         {
     sequelize,

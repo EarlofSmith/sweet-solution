@@ -7,19 +7,14 @@ const Order = require('./Order');  // for the "Orders" table data model associat
 const Review = require('./Review');  // for the "Reviews" table data model association
 const Order_Detail = require('./Order_Detail');
 
-
 // "Categories" data/table relationships:
-
 
 // for the many-to-many relationship with the "Products" table
 Category.belongsTo(Product, {
   foreignKey: 'category_id'
 });
 
-
-
 // "Products" data/table relationships:
-
 
 // for the one-to-many relationship with the "Reviews" table
 Product.hasMany(Review, {
@@ -27,19 +22,13 @@ Product.hasMany(Review, {
   // other options?
 });
 
-
-
 // for the many-to-many relationship with the "Orders" table
 Product.belongsToMany(Order, {
   through: Order_Detail,
   foreignKey: 'product_id'
 });  
 
-
-
-//
 // "Users" data/table relationships:
-//
 
 // for the one-to-many relationship with the "Orders" table
 User.hasMany(Order, {
@@ -54,11 +43,8 @@ User.hasMany(Review, {
   // No delete should occur; only set "Cancelled" status.
   // other options?
 });
-  
-  
-//
+
 // "Orders" data/table relationships:
-//
 
 Order.hasMany(Order_Detail, {
   foreignKey: 'order_id'
@@ -83,12 +69,8 @@ Order_Detail.belongsTo(Order, {
 Order_Detail.hasMany(Order, {
   foreignKey: 'order_id'
 });
-  
 
-
-//
 // "Reviews" data/table relationships:
-//
 
 // for the many-to-one relationship with the "Users" table
 Review.belongsTo(User, {
@@ -102,9 +84,6 @@ Review.belongsTo(Product, {
   // other options?
 });
 
-
-//
 // data models exports
-//
 
 module.exports = { User, Category, Order, Order_Detail, Product, Review };
