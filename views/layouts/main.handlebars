@@ -28,10 +28,10 @@
             <!-- Only show cart when they have logged in -->
 
             {{#if loggedIn}}
-             <button id="logout" class="btn-no-style">Logout</button>
+             <a id="logout" class="nav-link fw-bold py-1 px-2">Logout</a>
               <a class="nav-link fw-bold py-1 px-2" href="#">Cart</a
             {{else}}
-               <a class="nav-link fw-bold py-1 px-2" href="user/login">Login</a>
+               <a class="nav-link fw-bold py-1 px-2" href="/login">Login</a>
             {{/if}}
           </nav>
         </div>
