@@ -24,7 +24,12 @@ h3 {
   color: var(--dark-brown); 
 }
 
-#aside {
+.list-group-item {
+  background-color: var(--light-blue);
+  color: var(--dark-brown)
+}
+
+#sidebar-wrapper {
   background-color: var(--light-blue);
   color: var(--grey);
   border-radius: 10px;
