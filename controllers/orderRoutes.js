@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Order, User, Product } = ('../models')
+const { Order, User, Product } = require('../models')
 
 
 // route to get all orders
@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     res.json(err);
   });
   const orders = orderData.map((order) => order.get({ plain: true}));
-  res.render('all', {orders});
+  res.render('order', {orders});
 });
 
 // route to get an order by specific id
