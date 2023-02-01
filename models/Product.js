@@ -34,14 +34,14 @@ Product.init(
             type: DataTypes.TEXT,
             allowNull: true,
           },
-          review_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            references: {
-                model: 'review',
-                key: 'id'
-            }
-          },
+          // review_id: {
+          //   type: DataTypes.INTEGER,
+          //   allowNull: true,
+          //   references: {
+          //       model: 'review',
+          //       key: 'id'
+          //   }
+          // },
         },
         {
     sequelize,
