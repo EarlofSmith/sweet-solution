@@ -7,6 +7,7 @@ router.get('/', async (req, res) => {
   const productData = await Product.findAll().catch((err) => {
     res.json(err);
   });
+  res.status(200).json(productData);
   res.render('product', {productData});
 });
 
