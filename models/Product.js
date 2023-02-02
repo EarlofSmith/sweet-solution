@@ -23,7 +23,7 @@ Product.init(
             }
           },
           price_per: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
             validate: {
                 isNumeric: true,
