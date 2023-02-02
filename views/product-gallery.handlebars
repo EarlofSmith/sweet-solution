@@ -1,3 +1,7 @@
+{{!-- {{ > category.nav }}
+{{#each product as |product| }}
+{{ > product-card }}
+{{/each}} --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,20 +18,6 @@
 </head>
 <body class="d-flex h-100 text-bg-dark">
     <!-- NAVIGATION BAR -->
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header>
-        <div>
-          <img class="logo float-md-start" width="40" height="40" src="../../public/images/logo.png">
-          <h3 class="float-md-start px-1">Sweet Solution</h3>
-          <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="nav-link fw-bold py-1 px-2 active" aria-current="page" href="#">Home</a>
-            <a class="nav-link fw-bold py-1 px-2" href="#">Products</a>
-            <a class="nav-link fw-bold py-1 px-2" href="#">Login</a>
-            <!-- Only show cart when they have logged in -->
-            <a class="nav-link fw-bold py-1 px-2" href="#">Cart</a>
-          </nav>
-        </div>
-      </header>
     <div class="d-flex" id="wrapper">
         <!-- SIDEBAR -->
         <div class="border-end p-3" id="sidebar-wrapper">
@@ -47,12 +37,13 @@
         <div id="page-content-wrapper">
             <!-- Page content-->
             <div class="container-fluid p-3">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">                        
+                    {{#each products as |product|}}
                     <div class="col">
                       <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>{{product.product_name}}</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                         <div class="card-body">
-                          <p class="card-text">Product Name</p>
+                          <p class="card-text">{{product.product_name}}</p>
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="dropdown">
                               <button
@@ -78,6 +69,8 @@
                         </div>
                       </div>
                     </div>
+                    {{/each}}
+
                     <div class="col">
                       <div class="card shadow-sm">
                         <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
