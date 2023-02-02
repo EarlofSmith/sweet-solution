@@ -31,14 +31,13 @@ User.init(
       validate: {
         isEmail: true,
       },
-    
     },
-      phone_number: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        validate: {
-          isNumeric: true,
-        }
+    phone_number: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        isNumeric: true,
+      }
       },
     password: {
       type: DataTypes.STRING,
@@ -54,13 +53,19 @@ User.init(
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
+      beforeUpdate: async (updatedUserData) => {
+        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        return updatedUserData;
+      }
     },
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'user',
+  sequelize,
+  timestamps: false,
+  freezeTableName: true,
+  underscored: true,
+  modelName: 'user',
   }
 );
 
 module.exports = User;
+
+// We worked on this page together.

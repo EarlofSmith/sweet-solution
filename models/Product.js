@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class Product extends Model {}
@@ -16,8 +15,8 @@ Product.init(
             type:DataTypes.STRING,
             allowNull: false,
           },
-          category: {
-            type: DataTypes.STRING,
+          category_id: {
+            type: DataTypes.INTEGER,
             references: {
                 model: 'category',
                 key: 'id'
@@ -31,25 +30,32 @@ Product.init(
                 isDecimal: true,
             }
           },
-          special_instructions: {
+          description: {
             type: DataTypes.TEXT,
             allowNull: true,
           },
-          reviews: {
-            type: DataTypes.TEXT,
+          review_id: {
+            type: DataTypes.INTEGER,
             allowNull: true,
             references: {
-                model: 'reviews',
+                model: 'review',
                 key: 'id'
             }
           },
-          sequelize,
+          //image_file: {
+          //  type: DataTypes.STRING,
+          //  allowNull: true,
+          //},
+        },
+        {
+    sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'products',
+    modelName: 'product',
     }
 );
 
 module.exports = Product;
-// we worked on this page together
+
+// We worked on this page together.
