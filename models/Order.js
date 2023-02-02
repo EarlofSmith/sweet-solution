@@ -31,18 +31,19 @@ Order.init(
       due_date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
-        // validate: {
-        //     isAfter: 
-        // }
+      },
+      order_date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
       },
       special_instructions: {
         type: DataTypes.TEXT,
         allowNull: true
       },
-      // total_price: {
-      //   type: DataTypes.DECIMAL,
-      //   allowNull: false,
-      // },
+      total_price: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+      },
       
 
       // refactor some of the table fields to put the appropriate data in.

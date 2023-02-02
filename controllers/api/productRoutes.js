@@ -7,7 +7,11 @@ router.get('/', async (req, res) => {
   const productData = await Product.findAll().catch((err) => {
     res.json(err);
   });
-  res.render('product', {productData});
+  const products = productData.map((product) => product.get({ plain: true }));
+  // res.status(200).json(productData);
+  // res.render('product', {productData});
+  console.log(products); 
+  res.render('product-gallery', {products}); 
 });
 
 // route to get an Product by specific id

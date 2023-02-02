@@ -62,14 +62,17 @@ Order.belongsToMany(Product, {
   foreignKey: 'order_id',
 });
 
-Order_Detail.belongsTo(Order, {
-  foreignKey: 'order_id'
-});
+// Order_Detail.belongsTo(Order, {
+//   foreignKey: 'order_id'
+// });
 
-Order_Detail.hasMany(Order, {
-  foreignKey: 'order_id'
-});
+// Order_Detail.hasMany(Order, {
+//   foreignKey: 'order_id'
+// });
+  
 
+
+//
 // "Reviews" data/table relationships:
 
 // for the many-to-one relationship with the "Users" table

@@ -8,7 +8,9 @@ router.get('/', async (req, res) => {
     res.json(err);
   });
   const Order_Details = Order_DetailData.map((Order_Detail) => Order_Detail.get({ plain: true}));
-  res.render('order', {Order_Details});
+  res.status(200).json(Order_Details)
+  // res.render('order', {Order_Details});
+
 });
 
 // route to get an Order_Detail by specific id
