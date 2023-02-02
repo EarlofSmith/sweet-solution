@@ -23,14 +23,14 @@ Product.init(
             }
           },
           price_per: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
             validate: {
                 isNumeric: true,
                 isDecimal: true,
             }
           },
-          special_instructions: {
+          description: {
             type: DataTypes.TEXT,
             allowNull: true,
           },
