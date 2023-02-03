@@ -40,12 +40,35 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const reviewData = await Review.create(req.body);
+    const reviewData = await Review.create({
+      product_id: req.body.product_id,
+      user_id: req.body.user_id,
+      review_content: req.body.review_content
+    });
     res.status(200).json({ message: 'New review created!', reviewData})
   } catch (err) {
     res.status(400).json(err)
   }
 });
+
+
+router.put('/:id', async (req, res) => {
+  try {
+    const reviewData = await Review.update(
+      {
+        review_content: req.body.review_content,
+      },
+      {
+        where: {
+          id: req.params.id,
+        }
+      }
+    )
+  } catch (err) {
+
+  }
+})
+
 
 // delete a review by id
 router.delete('/:id', async (req, res) => {
