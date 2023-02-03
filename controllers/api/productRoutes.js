@@ -37,6 +37,27 @@ router.get('/:id', async (req, res) => {
   });
 
 
+// GET all products by specific category id
+router.get('/:category_id/:product_category_id', async (req, res) => {
+  try {
+    const productData = await Product.findAll({
+      where: {category_id: req.params.product_category_id}
+    });
+    if(productData) {
+      //const products = productData.map((product) => product.get({plain: true}));
+      //const products = productData.get({ plain: true });
+      // res.render('product', {products});
+      res.status(200).json(productData);
+    } else {
+      res.status(400).json({message: 'There is not a product-category that has that ID.'});
+      return;
+    }
+  } catch(err) {
+    res.status(500).json(err)
+  }
+});
+
+
 // POST create a new product.
 router.post('/', async (req, res) => {  // TO-DO: Re-add "auth,".
     try {
