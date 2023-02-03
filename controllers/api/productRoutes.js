@@ -8,9 +8,9 @@ const auth = require('../../utils/Auth');
 router.get('/', async (req, res) => {
     try {
         const productData = await Product.findAll();
-        res.status(200).json(productData);
-        // const product = productData.map((product) => product.get({ plain: true }));
-        // res.render('product-gallery', {products}); 
+        // res.status(200).json(productData);
+        const products = productData.map((product) => product.get({ plain: true }));
+        res.render('product-gallery', {products}); 
 
     } catch(err) {
       res.status(500).json(err);
