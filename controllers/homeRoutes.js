@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const auth = require('../utils/auth');
+const Category = require('../models/Category')
 const {Product, Order} = require('../models')
 // router.use('/', homeRoutes);
 
@@ -51,6 +52,35 @@ router.get('/product', (req, res) => {
   // };
 });
 
+router.get('/category', async (req, res) => {
+  console.log('test')
+  try {
+    const categoryData = await Category.findAll({
+      include: 
+        { 
+          model: Product,
+          attributes: [
+            'id',
+            'product_name',
+            'category_id',
+            'price_per',
+            'description',
+            'filename'
+          ] 
+        }
+    });
+    const categories = categoryData.map((category) => category.get({ plain: true }));
+    // const productDetails = categoryData.Product.map((product) => JSON.parse(product.get({ plain: true})))
+    // console.log(JSON.parse(categories));
+    console.table('categories', categories);
+    // console.log('prods', productDetails)
+    
+    res.render('product-gallery', {categories});
+  } catch(err) {
+    res.status(400).json(err);
+  }
+})
+
 router.get('/Order', (req, res) => {
   Order.findAll().then((orderData) => {
     const orders = orderData.map((order) => order.get({ plain: true }));
@@ -59,5 +89,6 @@ router.get('/Order', (req, res) => {
   })
   .catch((err => res.status(400).json(err)));
 });
+
 
 module.exports = router;

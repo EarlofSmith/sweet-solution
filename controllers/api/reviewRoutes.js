@@ -5,7 +5,7 @@ const { Review, Product, User } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const reviewData = await Review.findAll({
-      include: [{ model: Product }, {model: User, attributes: {exclude: 'password'}}]
+      include: [{ model: Product }, {model: User, attributes: ['last_name', 'first_name', 'email']}]
     });
     if(!reviewData) {
       res.status(400).json({ message: 'No review found'})
