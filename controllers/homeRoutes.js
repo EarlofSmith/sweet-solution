@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const auth = require('../utils/auth');
-const Product = require('../models/Product')
+const Product = require('../models/Product');
+const Category = require('../models/Category')
 // router.use('/', homeRoutes);
 
 router.get('/', async (req, res) => {
@@ -48,5 +49,34 @@ router.get('/product', (req, res) => {
   //   res.status(500).json(err);
   // };
 });
+
+router.get('/category', async (req, res) => {
+  console.log('test')
+  try {
+    const categoryData = await Category.findAll({
+      include: 
+        { 
+          model: Product,
+          attributes: [
+            'id',
+            'product_name',
+            'category_id',
+            'price_per',
+            'description',
+            'filename'
+          ] 
+        }
+    });
+    const categories = categoryData.map((category) => category.get({ plain: true }));
+    // const productDetails = categoryData.Product.map((product) => JSON.parse(product.get({ plain: true})))
+    // console.log(JSON.parse(categories));
+    console.table('categories', categories);
+    // console.log('prods', productDetails)
+    
+    res.render('product-gallery', {categories});
+  } catch(err) {
+    res.status(400).json(err);
+  }
+})
 
 module.exports = router;

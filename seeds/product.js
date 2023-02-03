@@ -1,3 +1,4 @@
+const { Product } = require('../models')
 
 const productData = [
     {
@@ -47,7 +48,7 @@ const productData = [
         category_id: 3, 
         price_per: 3.00, 
         description: "Sweet roll carrot cake brownie danish cupcake sweet muffin marshmallow.", 
-        filename: '07-german-chocolate-cupcake.jpg
+        filename: '07-german-chocolate-cupcake.jpg'
     },
     {
         product_name: "Strawberry Shortcake Cupcake", 
