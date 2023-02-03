@@ -7,10 +7,15 @@ const auth = require('../../utils/Auth');
 // GET all products.
 router.get('/', async (req, res) => {
     try {
-        const productData = await Product.findAll();
-        // res.status(200).json(productData);
-        const products = productData.map((product) => product.get({ plain: true }));
-        res.render('product-gallery', {products}); 
+
+        const productData = await Product.findAll({
+          include: {
+            model: Category
+          }
+        });
+        res.status(200).json(productData);
+        // const product = productData.map((product) => product.get({ plain: true }));
+        // res.render('product-gallery'); 
 
     } catch(err) {
       res.status(500).json(err);
@@ -24,7 +29,7 @@ router.get('/:id', async (req, res) => {
       const productData = await Product.findByPk(req.params.id);
       if(productData) {
         const product = productData.get({plain: true});
-        //res.render('product', {product});
+        res.render('product', {product});
         res.status(200).json(productData);
 
       } else {
