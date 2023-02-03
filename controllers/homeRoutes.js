@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const auth = require('../utils/auth');
-const Product = require('../models/Product');
 const Category = require('../models/Category')
+const {Product, Order} = require('../models')
 // router.use('/', homeRoutes);
 
 router.get('/', async (req, res) => {
@@ -35,6 +35,8 @@ router.get('/product', (req, res) => {
     res.render('product-gallery', { products });
   })
   .catch((err => res.status(400).json(err)));
+
+  
   
   // console.log('aiuuhfuashdfu')
   // try {
@@ -78,5 +80,15 @@ router.get('/category', async (req, res) => {
     res.status(400).json(err);
   }
 })
+
+router.get('/Order', (req, res) => {
+  Order.findAll().then((orderData) => {
+    const orders = orderData.map((order) => order.get({ plain: true }));
+    console.log('these are the Orders hopefully', orders);
+    res.render('order', { orders });
+  })
+  .catch((err => res.status(400).json(err)));
+});
+
 
 module.exports = router;

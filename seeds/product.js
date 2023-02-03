@@ -48,7 +48,7 @@ const productData = [
         category_id: 3, 
         price_per: 3.00, 
         description: "Sweet roll carrot cake brownie danish cupcake sweet muffin marshmallow.", 
-        filename: '07-german-chocolate-cupcake.jpg'
+        filename: '07-german-chocolate-cupcake.jpg',
     },
     {
         product_name: "Strawberry Shortcake Cupcake", 
@@ -153,56 +153,56 @@ const productData = [
         category_id: 6, 
         price_per: 9.00, 
         description: "Sweet roll carrot cake brownie danish cupcake sweet muffin marshmallow.",  
-        filename: 'whole-wheat-bread.jpg',
+        filename: '22-whole-wheat-bread.jpg',
     },
     {
         product_name: "Banana Bread (GF)", 
         category_id: 7, 
         price_per: 7.00, 
         description: "Sweet roll carrot cake brownie danish cupcake sweet muffin marshmallow.", 
-        filename: 'gf-banana-bread.jpg',
+        filename: '23-gf-banana-bread.jpg',
     },
     {
         product_name: "Sugar Cookie (GF)", 
         category_id: 7, 
         price_per: 3.00, 
         description: "Sweet roll carrot cake brownie danish cupcake sweet muffin marshmallow.", 
-        filename: 'gf-sugar-cookie.jpg',
+        filename: '24-gf-sugar-cookie.jpg',
     },
     {
         product_name: "Cherry Pie (GF)", 
         category_id: 7, 
         price_per: 25.00, 
         description: "Sweet roll carrot cake brownie danish cupcake sweet muffin marshmallow.", 
-        filename: 'gf-cherry-pie.jpg',
+        filename: '25-gf-cherry-pie.jpg',
     },
     {
         product_name: "Mocha Cupcake (Vegan)", 
         category_id: 8, 
         price_per: 4.00, 
         description: "Sweet roll carrot cake brownie danish cupcake sweet muffin marshmallow.", 
-        filename: 'vegan-mocha-cupcake.jpg',
+        filename: '26-vegan-mocha-cupcake.jpg',
     },
     {
         product_name: "Pumpkin Cheesecake (Vegan)", 
         category_id: 8, 
         price_per: 35.00, 
         description: "Sweet roll carrot cake brownie danish cupcake sweet muffin marshmallow.", 
-        filename: 'vegan-pumpkin-cheesecake.jpg',
+        filename: '27-vegan-pumpkin-cheesecake.jpg',
     },
     {
         product_name: "Cherry Cheesecake (Vegan)", 
         category_id: 8, 
         price_per: 35.00, 
         description: "Sweet roll carrot cake brownie danish cupcake sweet muffin marshmallow.", 
-        filename: 'vegan-cherry-cheesecake.jpg',
+        filename: '28-vegan-cherry-cheesecake.jpg',
     },
     {
         product_name: "Ginger Cookie (Vegan)", 
         category_id: 8, 
         price_per: 3.00, 
         description: "Sweet roll carrot cake brownie danish cupcake sweet muffin marshmallow.", 
-        filename: 'vegan-ginger-cookie.jpg',
+        filename: '29-vegan-ginger-cookie.jpg',
     }
 ]
 
