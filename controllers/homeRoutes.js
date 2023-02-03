@@ -52,10 +52,10 @@ router.get('/product', (req, res) => {
 });
 
 router.get('/Order', (req, res) => {
-  Order.findAll().then((OrderData) => {
-    const Orders = OrderData.map((Order) => Order.get({ plain: true }));
-    console.log('these are the Orders hopefully', Orders);
-    res.render('order', { Orders });
+  Order.findAll().then((orderData) => {
+    const orders = orderData.map((order) => order.get({ plain: true }));
+    console.log('these are the Orders hopefully', orders);
+    res.render('order', { orders });
   })
   .catch((err => res.status(400).json(err)));
 });
