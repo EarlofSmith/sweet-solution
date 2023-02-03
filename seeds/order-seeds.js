@@ -41,6 +41,22 @@ const orderData = [
     "total_price": 10.00,
     "special_instructions": "eat a lot of these items!"
   },
+  {
+    "user_id": 6,
+    "product_id": 6,
+    "due_date": 2023-12-24,
+    "order_date": 2023-5-15,
+    "total_price": 20.00,
+    "special_instructions": "eat a lot of these items!"
+  },
+  {
+    "user_id": 7,
+    "product_id": 7,
+    "due_date": 2023-12-24,
+    "order_date": 2023-5-15,
+    "total_price": 77.00,
+    "special_instructions": "eat a lot of these items!"
+  },
 ]
 
 const seedOrders = () => Order.bulkCreate(orderData)

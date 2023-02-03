@@ -7,16 +7,11 @@ const auth = require('../../utils/Auth');
 // GET all products.
 router.get('/', async (req, res) => {
     try {
-
-        const productData = await Product.findAll({
-          include: {
-            model: Category
-          }
-        });
-        res.status(200).json(productData);
-        // const product = productData.map((product) => product.get({ plain: true }));
-        // res.render('product-gallery'); 
-
+      const productData = await Product.findAll(
+        {include: {model: Category}});
+      res.status(200).json(productData);
+      const products = productData.map((product) => product.get({plain: true}));
+      // res.render('product-gallery', {products}); 
     } catch(err) {
       res.status(500).json(err);
     };
@@ -26,19 +21,18 @@ router.get('/', async (req, res) => {
 // GET a product by specific ID.
 router.get('/:id', async (req, res) => {
     try {
-      const productData = await Product.findByPk(req.params.id);
-      if(productData) {
+      const productData = await Product.findByPk(req.params.id, 
+        {include: {model: Category}});
+      if (productData) {
+        res.status(200).json(productData);
         const product = productData.get({plain: true});
         res.render('product', {product});
-        res.status(200).json(productData);
-
       } else {
         res.status(404).json({message: 'There is not a product that has that ID.'});
         return;
-      }
-      
+      }      
     } catch(err) {
-      res.status(500).json(err)
+      res.status(500).json(err);
     }
   });
 
@@ -95,5 +89,6 @@ router.delete('/:id', async (req, res) => {  // TO-DO: Re-add "auth,".
       res.status(500).json(err);
     }
   });
+
 
   module.exports = router; 
