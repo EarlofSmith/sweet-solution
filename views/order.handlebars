@@ -11,7 +11,19 @@
   <body>
     <header>Orders</header>
     <div>Here is your order</div>
-    <div>{{order.id}}</div>
+    
+        {{#each orders as |order|}}
+        <div class="card" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <p class="card-text">{{order.product_id}}</p>
+            <p class="card-text">Due date:{{order.due_date}}</p>
+            <p class="card-text">Ordered Date:{{order.order_date}}</p>
+            <p class="card-text">Special Instructions:{{order.special_instructions}}</p>
+            <p class="card-text">Total Price:{{order.total_price}}</p>
+        </div>
+    </div>
+    {{/each}}
     <footer>footerstuff</footer>
   </body>
 
