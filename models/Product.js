@@ -34,6 +34,10 @@ Product.init(
             type: DataTypes.TEXT,
             allowNull: true,
           },
+          filename: {
+            type: DataTypes.STRING, 
+            allowNull: true, 
+          },
           // review_id: {
           //   type: DataTypes.INTEGER,
           //   allowNull: true,
