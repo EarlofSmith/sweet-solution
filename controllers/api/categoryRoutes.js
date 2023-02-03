@@ -4,8 +4,8 @@ const Product = require('../../models/Product');
 const bcrypt = require('bcrypt');
 const auth = require('../../utils/Auth');
 
-// GET all categories
 
+// GET all categories
 router.get('/', async (req, res) => {
   try {
       const categoryData = await Category.findAll({
@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
       res.status(200).json(categoryData);
       // const category = categoryData.map((category) => category.get({ plain: true }));
       // res.render('category-gallery', {categories}); 
-
   } catch(err) {
     res.status(500).json(err);
   };
@@ -31,19 +30,41 @@ router.get('/:id', async (req, res) => {
         const category = categoryData.get({ plain: true });
         // res.render('category', {category});
         res.status(200).json(categoryData);
-
       } else {
-        res.status(400).json({ message: 'No category with that id!'});
+        res.status(400).json({message: 'No category with that ID!'});
         return;
-      }
-      
+      }    
     } catch(err) {
       res.status(500).json(err)
     }
   });
 
 
-  // POST create a new category
+// GET a Category by specific category id and then get related products
+router.get('/:category_id/:product_category_id', async (req, res) => {
+  try {
+    const categoryData = await Category.findAll({
+      attributes: ['category_name'], 
+      where: {id: req.params.category_id}, 
+      include: [
+      {model: Product, where: {category_id: req.params.category_id}}]
+    });
+    if(categoryData) {
+      //const category = categoryData.map((category) => category.get({plain: true}));
+      //const category = categoryData.get({ plain: true });
+      // res.render('category', {category});
+      res.status(200).json(categoryData);
+    } else {
+      res.status(400).json({message: 'No category-product combination with that ID!'});
+      return;
+    }
+  } catch(err) {
+    res.status(500).json(err)
+  }
+});
+
+
+// POST create a new category
 router.post('/', async (req, res) => {
     try {
       const categoryData = await Category.create({
@@ -65,7 +86,7 @@ router.put('/:id', async (req, res) => {
         },
       });
       if (!categoryData[0]) {
-        res.status(404).json({ message: 'No category with this id!' });
+        res.status(404).json({message: 'No category with this ID!'});
         return;
       }
       res.status(200).json(categoryData);
@@ -84,13 +105,14 @@ router.delete('/:id', async (req, res) => {
         },
       });
       if (!categoryData) {
-        res.status(404).json({ message: 'No category with this id!' });
+        res.status(404).json({message: 'No category with this ID!'});
         return;
       }
-      res.status(200).json( {message: 'Category deleted.'} );
+      res.status(200).json( {message: 'Category deleted.'});
     } catch (err) {
       res.status(500).json(err);
     }
   });
+
 
   module.exports = router; 
