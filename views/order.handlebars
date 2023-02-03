@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-  </head>
-
-  <body>
+  
     <header>Orders</header>
     <div>Here is your order</div>
-    <div>{{order.id}}</div>
-    <footer>footerstuff</footer>
-  </body>
+    
+        {{#each orders as |order|}}
+        <div class="card" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <p class="card-text">{{order.product_id}}</p>
+            <p class="card-text">Due date:{{order.due_date}}</p>
+            <p class="card-text">Ordered Date:{{order.order_date}}</p>
+            <p class="card-text">Special Instructions:{{order.special_instructions}}</p>
+            <p class="card-text">Total Price:{{order.total_price}}</p>
+        </div>
+    </div>
+    {{/each}}
+   
 
-</html>
+
