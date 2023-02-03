@@ -9,12 +9,16 @@ const Order_Detail = require('./Order_Detail');
 
 // "Categories" data/table relationships:
 
-// for the many-to-many relationship with the "Products" table
-Category.belongsTo(Product, {
+// for the one-to-many relationship with the "Products" table
+Category.hasMany(Product, {
   foreignKey: 'category_id'
 });
 
 // "Products" data/table relationships:
+
+Product.belongsTo(Category, {
+  foreignKey: 'category_id', 
+})
 
 // for the one-to-many relationship with the "Reviews" table
 Product.hasMany(Review, {

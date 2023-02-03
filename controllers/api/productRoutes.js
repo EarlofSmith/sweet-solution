@@ -7,6 +7,7 @@ const auth = require('../../utils/Auth');
 // GET all products.
 router.get('/', async (req, res) => {
     try {
+
         const productData = await Product.findAll({
           include: {
             model: Category
@@ -15,6 +16,7 @@ router.get('/', async (req, res) => {
         res.status(200).json(productData);
         // const product = productData.map((product) => product.get({ plain: true }));
         // res.render('product-gallery'); 
+
     } catch(err) {
       res.status(500).json(err);
     };

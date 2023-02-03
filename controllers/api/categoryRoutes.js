@@ -5,27 +5,28 @@ const bcrypt = require('bcrypt');
 const auth = require('../../utils/Auth');
 
 // GET all categories
+
 router.get('/', async (req, res) => {
-    try {
-        const categoryData = await Category.findAll({
-            include: [{ model: Product }], 
-        });
+  try {
+      const categoryData = await Category.findAll({
+        include: [{ model: Product }], 
+      });
+      res.status(200).json(categoryData);
+      // const category = categoryData.map((category) => category.get({ plain: true }));
+      // res.render('category-gallery', {categories}); 
 
-        console.log(categories); 
-        res.status(200).json(categoryData);
-        // const categories = categoryData.map((category) => category.get({ plain: true }));
-        // res.render('category-gallery', {categories}); 
-
-    } catch(err) {
-      res.status(500).json(err);
-    };
-  });
+  } catch(err) {
+    res.status(500).json(err);
+  };
+});
 
 
 // GET a Category by specific id
 router.get('/:id', async (req, res) => {
     try {
-      const categoryData = await Category.findByPk(req.params.id);
+      const categoryData = await Category.findByPk(req.params.id, {
+        include: [{ model: Product }], 
+      });
       if(categoryData) {
         const category = categoryData.get({ plain: true });
         // res.render('category', {category});
@@ -55,7 +56,7 @@ router.post('/', async (req, res) => {
   });
 
 
-// PUT update a user
+// PUT update a category
 router.put('/:id', async (req, res) => {
     try {
       const categoryData = await Category.update(req.body, {
@@ -74,15 +75,15 @@ router.put('/:id', async (req, res) => {
   });
 
 
-// DELETE a user
+// DELETE a category
 router.delete('/:id', async (req, res) => {
     try {
-      const categoryData = await Category.update(req.body, {
+      const categoryData = await Category.destroy({
         where: {
           id: req.params.id,
         },
       });
-      if (!categoryData[0]) {
+      if (!categoryData) {
         res.status(404).json({ message: 'No category with this id!' });
         return;
       }
