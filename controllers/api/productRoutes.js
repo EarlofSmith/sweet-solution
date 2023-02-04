@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     } catch(err) {
       res.status(500).json(err);
     };
-  });
+});
 
 
 // GET a product by specific ID.
@@ -34,10 +34,10 @@ router.get('/:id', async (req, res) => {
     } catch(err) {
       res.status(500).json(err);
     }
-  });
+});
 
 
-// GET all products by specific category id
+// GET all products by specific category ID.
 router.get('/:category_id/:product_category_id', async (req, res) => {
   try {
     const productData = await Product.findAll({
@@ -46,7 +46,7 @@ router.get('/:category_id/:product_category_id', async (req, res) => {
     if(productData) {
       //const products = productData.map((product) => product.get({plain: true}));
       //const products = productData.get({ plain: true });
-      // res.render('product', {products});
+      //res.render('product', {products});
       res.status(200).json(productData);
     } else {
       res.status(400).json({message: 'There is not a product-category that has that ID.'});
@@ -71,7 +71,7 @@ router.post('/', async (req, res) => {  // TO-DO: Re-add "auth,".
     } catch (err) {
       res.status(500).json(err);
     }
-  });
+});
 
 
 // PUT update a product.
@@ -90,7 +90,7 @@ router.put('/:id', async (req, res) => {  // TO-DO: Re-add "auth,".
     } catch (err) {
       res.status(500).json(err);
     }
-  });
+});
 
 
 // DELETE a product.
@@ -109,7 +109,7 @@ router.delete('/:id', async (req, res) => {  // TO-DO: Re-add "auth,".
     } catch (err) {
       res.status(500).json(err);
     }
-  });
+});
 
 
-  module.exports = router; 
+module.exports = router; 

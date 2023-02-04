@@ -4,27 +4,27 @@ const Category = require('../models/Category')
 const {Product, Order} = require('../models')
 // router.use('/', homeRoutes);
 
-router.get('/', async (req, res) => {
-    try {
-        // const categoriesData = await Category.findAll();
-        // const categories = categoriesData.map(
-        //     (category) => category.get({ plain: true }));
-        //res.status(200).json(categories);
-        //res.render('<model type>', { <model type> });
-        res.render("homepage", {
-            
-            loggedIn: req.session.loggedIn
-        });
 
-    } catch(err) {
-        res.status(500).json({message: "An error occurred, please try again. If problem persists, contact us"});
-    }
+router.get('/', async (req, res) => {
+  try {
+      // const categoriesData = await Category.findAll();
+      // const categories = categoriesData.map(
+      //     (category) => category.get({ plain: true }));
+      //res.status(200).json(categories);
+      //res.render('<model type>', { <model type> });
+      res.render("homepage", {
+          
+          loggedIn: req.session.loggedIn
+      });
+  } catch(err) {
+      res.status(500).json({message: "An error occurred, please try again. If problem persists, contact us"});
+  }
 });
 
-router.get('/login', async (req, res) => {
 
+router.get('/login', async (req, res) => {
     res.render('login',);
-  });
+});
 
 
 // GET all products.
@@ -36,8 +36,6 @@ router.get('/product', (req, res) => {
   })
   .catch((err => res.status(400).json(err)));
 
-  
-  
   // console.log('aiuuhfuashdfu')
   // try {
       
@@ -51,6 +49,7 @@ router.get('/product', (req, res) => {
   //   res.status(500).json(err);
   // };
 });
+
 
 router.get('/category', async (req, res) => {
   console.log('test')
@@ -73,13 +72,58 @@ router.get('/category', async (req, res) => {
     // const productDetails = categoryData.Product.map((product) => JSON.parse(product.get({ plain: true})))
     // console.log(JSON.parse(categories));
     console.table('categories', categories);
-    // console.log('prods', productDetails)
-    
+    // console.log('prods', productDetails);
     res.render('product-gallery', {categories});
   } catch(err) {
     res.status(400).json(err);
   }
 })
+
+
+// GET all products by specific category ID.
+router.get('/product/:category_id/:product_category_id', async (req, res) => {
+  try {
+    const productData = await Product.findAll({
+      where: {category_id: req.params.product_category_id}
+    });
+    if(productData) {
+      const products = productData.map((product) => product.get({plain: true}));
+      //const products = productData.get({ plain: true });
+      res.render('product', {products});
+      //res.status(200).json(productData);
+    } else {
+      res.status(400).json({message: 'There is not a product-category that has that ID.'});
+      return;
+    }
+  } catch(err) {
+    res.status(500).json(err)
+  }
+});
+
+
+// GET a Category by specific category id and then get related products.
+router.get('/category/:category_id/:product_category_id', async (req, res) => {
+  try {
+    const categoryData = await Category.findAll({
+      attributes: ['category_name'], 
+      where: {id: req.params.category_id}, 
+      include: [
+      {model: Product, where: {category_id: req.params.category_id}}]
+    });
+    if(categoryData) {
+      const category = categoryData.map((category) => category.get({plain: true}));
+      //const category = categoryData.get({ plain: true });
+      res.render('category', {category});
+      //res.status(200).json(categoryData);
+    } else {
+      res.status(400).json({message: 'No category-product combination with that ID!'});
+      return;
+    }
+  } catch(err) {
+    res.status(500).json(err)
+  }
+});
+
 
 router.get('/Order', (req, res) => {
   Order.findAll().then((orderData) => {

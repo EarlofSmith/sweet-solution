@@ -11,13 +11,11 @@ router.post('/login', async (req, res) => {
                 email: req.body.email,
             }
         });
-
         if (!userDb) {
             res.status(404).json({message: `A user with that email currently does not exist in the User database.
               Please use a registered email, or create and account.`});
             return;
         }
-
         const validPassword = userDb.checkAuth(req.body.password);
          console.log(validPassword);
          console.log(userDb.password)
@@ -25,24 +23,20 @@ router.post('/login', async (req, res) => {
             res.status(404).json({message: 'Your password is incorrect. Please use a registered email, or create and account.'});
             return; 
         }
-
         req.session.save(() => {
             req.session.loggedIn = true;
             res.status(200).json({message: 'Login succeeded.'});
         });
-
     } catch(err) {
         res.status(500).json({message: "An error occurred, please try again. If problem persists, contact us"});
     }
 });
 
 
-// GET all users
+// GET all users.
 router.get('/', auth, async (req, res) => {
-
   try {
     const userData = await User.findAll();
-   
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
@@ -50,7 +44,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 
-// GET one user
+// GET one user.
 router.get('/:id', auth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id);
@@ -65,7 +59,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 
-// POST create a new user
+// POST create a new user.
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create({
@@ -82,7 +76,7 @@ router.post('/', async (req, res) => {
 });
 
 
-// PUT update a user
+// PUT update a user.
 router.put('/:id', auth, async (req, res) => {
   try {
     const userData = await User.update(req.body, {
@@ -101,7 +95,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 
-// DELETE a user
+// DELETE a user.
 router.delete('/:id', auth, async (req, res) => {
   try {
     const userData = await User.update(req.body, {
@@ -118,6 +112,7 @@ router.delete('/:id', auth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {

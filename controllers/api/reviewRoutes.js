@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { Review, Product, User } = require('../../models');
 
-// get all reviews
+
+// Get all reviews.
 router.get('/', async (req, res) => {
   try {
     const reviewData = await Review.findAll({
@@ -19,7 +20,8 @@ router.get('/', async (req, res) => {
   
 });
 
-// get review by id
+
+// Get review by ID.
 router.get('/:id', async (req, res) => {
   try {
     const reviewData = await Review.findByPk(req.params.id, {
@@ -31,12 +33,14 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
 // create a new review / review body
 // {
 //    "product_id": 1,   
 //    "user_id": 1,
 //    "review_content": "This is a good item!",
 //  }
+
 
 router.post('/', async (req, res) => {
   try {
@@ -65,12 +69,11 @@ router.put('/:id', async (req, res) => {
       }
     )
   } catch (err) {
-
   }
 })
 
 
-// delete a review by id
+// Delete a review by ID.
 router.delete('/:id', async (req, res) => {
   try {
     const reviewData = await Review.destroy({
@@ -78,12 +81,10 @@ router.delete('/:id', async (req, res) => {
         id: req.params.id
       }
     });
-
     if(!reviewData){
       res.status(400).json({ message: 'No review with that id!'});
       return;
     }
-
     res.status(200).json({ message: 'Review deleted successfully!'})
   } catch(err) {
     res.status(400).json(err)

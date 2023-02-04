@@ -9,12 +9,12 @@ const reviewRoutes = require('./reviewRoutes');
 const categoryRoutes = require('./categoryRoutes'); 
 
 
-
 router.use('/order', orderRoutes);
 router.use('/user', userRoutes);
 router.use('/product', productRoutes);
 router.use('/order_detail', orderDetailRoutes);
 router.use('/review', reviewRoutes);
 router.use('/category', categoryRoutes); 
+
 
 module.exports = router;
