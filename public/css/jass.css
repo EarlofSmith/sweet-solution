@@ -11,14 +11,20 @@ body {
   color: var(--dark-brown); 
 }
 
-.btn {
-  background-color: var(--green);
-}
-
 h3 {
   color: var(--dark-brown); 
-
+  font-family: 'Amatic SC', cursive;
 }
+
+p {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn {
+  background-color: var(--green);
+  font-family: 'Amatic SC', cursive;
+}
+
 
 .nav-link {
   color: var(--dark-brown); 
@@ -26,11 +32,26 @@ h3 {
 
 .list-group-item {
   background-color: var(--light-blue);
-  color: var(--dark-brown)
+  color: var(--dark-brown); 
+  /* font-family: 'Amatic', cursive; */
+}
+
+.nav-link {
+  font-family: 'Amatic SC', cursive;
+  font-size: large;
 }
 
 #sidebar-wrapper {
   background-color: var(--light-blue);
   color: var(--grey);
   border-radius: 10px;
+}
+
+#main-logo {
+  width: 500;
+  align-self: center;
+}
+
+#homepage-header {
+  font-family: 'Over the Rainbow', cursive;
 }
