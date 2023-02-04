@@ -2,6 +2,11 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 // const helpers = require('./utils/helpers');
 
+//////// ** NEW SYSTEM TECHNOLOGY ** ////////  REFER TO THE HOOK-BEFORE-CREATE FUNCTION AT BELOW.
+var moment = require('moment');
+moment().format(); 
+/////////////////////////////////////////////
+
 class Order extends Model {}
 
 Order.init(
@@ -30,25 +35,43 @@ Order.init(
       },
       due_date: {
         type: DataTypes.DATEONLY,
-        allowNull: false,
-        // validate: {
-        //     isAfter: 
-        // }
+        allowNull: true,
+      },
+      order_date: {
+        type: DataTypes.DATEONLY,
+        allowNull: true,
       },
       special_instructions: {
         type: DataTypes.TEXT,
         allowNull: true
       },
-      // total_price: {
-      //   type: DataTypes.DECIMAL,
-      //   allowNull: false,
-      // },
-      
-
-      // refactor some of the table fields to put the appropriate data in.
-
+      total_price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+      },
     },
     {
+      hooks: {  
+        beforeCreate: async (newOrderData) => {
+          //console.log("HOOK: BEFORE CREATE");
+          //
+          // ** NEW SYSTEM TECHNOLOGY **:
+          //
+          // Use the new-to-class topic NPM "moment" module to generate a current-moment 
+          // timestamp for the "order_date" field...and then use the "moment" module to
+          // manipulate the "order_date" value by adding 3 processing/baking days to the 
+          // involved order date to create the involved "due_date" field value.
+          //
+          //console.log(newOrderData.order_date);
+          //console.log(newOrderData.due_date);
+          //console.log(moment().toDate());
+          //console.log(moment().add(3, 'days').toDate());
+          newOrderData.order_date = moment().toDate();  // NEW SYSTEM TECHNOLOGY
+          newOrderData.due_date = moment().add(3, 'days').toDate();  // NEW SYSTEM TECHNOLOGY
+          //
+          return newOrderData;
+        },
+      },
       sequelize,
       timestamps: false,
       freezeTableName: true,

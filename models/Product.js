@@ -23,7 +23,7 @@ Product.init(
             }
           },
           price_per: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
             validate: {
                 isNumeric: true,
@@ -34,18 +34,18 @@ Product.init(
             type: DataTypes.TEXT,
             allowNull: true,
           },
-          review_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            references: {
-                model: 'review',
-                key: 'id'
-            }
+          filename: {
+            type: DataTypes.STRING, 
+            allowNull: true, 
           },
-          //image_file: {
-          //  type: DataTypes.STRING,
-          //  allowNull: true,
-          //},
+          // review_id: {
+          //   type: DataTypes.INTEGER,
+          //   allowNull: true,
+          //   references: {
+          //       model: 'review',
+          //       key: 'id'
+          //   }
+          // },
         },
         {
     sequelize,

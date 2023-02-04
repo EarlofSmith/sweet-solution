@@ -14,7 +14,7 @@ const helpers = require('./utils/helpers');
 
 const app = express();
 // setup port for local or heroku 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;  // for Heroku JAWSDB compatibility
 
 //setup session object
 const sess = {
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(routes);
 
 // sync orm to the datasource
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: false}).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
 });
 
