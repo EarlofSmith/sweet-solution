@@ -14,7 +14,7 @@ const helpers = require('./utils/helpers');
 
 const app = express();
 // setup port for local or heroku 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;  // for Heroku JAWSDB compatibility
 
 //setup session object
 const sess = {
