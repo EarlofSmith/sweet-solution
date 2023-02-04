@@ -8,8 +8,7 @@ const auth = require('../../utils/Auth');
 // GET all categories.
 router.get('/', async (req, res) => {
   try {
-      const categoryData = await Category.findAll({
-        include: [{ model: Product }], 
+      const categoryData = await Category.findAll({ 
       });
       res.status(200).json(categoryData);
       // const category = categoryData.map((category) => category.get({ plain: true }));
