@@ -66,11 +66,16 @@ router.put('/:id', async (req, res) => {
         where: {
           id: req.params.id,
         }
+      });
+      if (!reviewData[0]) {
+        res.status(404).json({message: 'There is not a review that has that ID.'});
+        return;
       }
-    )
-  } catch (err) {
-  }
-})
+      res.status(200).json({message: 'The selected review was updated.'});
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
 
 
 // Delete a review by ID.
