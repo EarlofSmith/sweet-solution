@@ -3,15 +3,12 @@ const { Order, User, Product, Order_Detail } = require('../../models');
 const auth = require('../../utils/Auth');
 
 
-// route to get all orders
+// Route to get all orders.
 router.get('/', async (req, res) => {
   try {
-    
     const OrderData = await Order.findAll({
       include: [{model: Order_Detail, attributes: ['quantity']}]
-      
     });
-
     if(!OrderData) {
       res.status(400).json({ message: 'No Order found'})
       return;
@@ -21,10 +18,10 @@ router.get('/', async (req, res) => {
   } catch (err) {
     res.status(500).json(err)
   }
-  
 });
 
-// route to get an order by specific id
+
+// Route to get an order by specific ID.
 router.get('/:id', async (req, res) => {
   try {
     const orderData = await Order.findByPk(req.params.id);
@@ -39,14 +36,15 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
 // POST create a new order.
 router.post('/', async (req, res) => {  // TO-DO: Re-add "auth,".
     try {
       const orderData = await Order.create({
         user_id: req.body.user_id, 
         product_id: req.body.product_id, 
-        due_date: req.body.due_date, 
-        order_date: req.body.order_date,
+        //due_date: req.body.due_date, 
+        //order_date: req.body.order_date,
         special_instructions: req.body.special_instructions,
         total_price: req.body.total_price,
       });
@@ -56,7 +54,8 @@ router.post('/', async (req, res) => {  // TO-DO: Re-add "auth,".
     }
   });
 
-  // PUT update a order.
+
+// PUT update a order.
 router.put('/:id',  async (req, res) => { 
   try {
     const OrderData = await Order.update(req.body, {
@@ -74,7 +73,8 @@ router.put('/:id',  async (req, res) => {
   }
 });
 
-// delete remove an order 
+
+// Delete remove an order.
 router.delete('/:id', async (req, res) => {
   try {
     const OrderData = await Order.destroy({
@@ -91,8 +91,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-
 
 
 module.exports = router;

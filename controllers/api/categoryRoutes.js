@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const auth = require('../../utils/Auth');
 
 
-// GET all categories
+// GET all categories.
 router.get('/', async (req, res) => {
   try {
       const categoryData = await Category.findAll({
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 });
 
 
-// GET a Category by specific id
+// GET a Category by specific ID.
 router.get('/:id', async (req, res) => {
     try {
       const categoryData = await Category.findByPk(req.params.id, {
@@ -40,7 +40,7 @@ router.get('/:id', async (req, res) => {
   });
 
 
-// GET a Category by specific category id and then get related products
+// GET a Category by specific category id and then get related products.
 router.get('/:category_id/:product_category_id', async (req, res) => {
   try {
     const categoryData = await Category.findAll({
@@ -52,7 +52,7 @@ router.get('/:category_id/:product_category_id', async (req, res) => {
     if(categoryData) {
       //const category = categoryData.map((category) => category.get({plain: true}));
       //const category = categoryData.get({ plain: true });
-      // res.render('category', {category});
+      //res.render('category', {category});
       res.status(200).json(categoryData);
     } else {
       res.status(400).json({message: 'No category-product combination with that ID!'});
@@ -64,7 +64,7 @@ router.get('/:category_id/:product_category_id', async (req, res) => {
 });
 
 
-// POST create a new category
+// POST create a new category.
 router.post('/', async (req, res) => {
     try {
       const categoryData = await Category.create({
@@ -74,10 +74,10 @@ router.post('/', async (req, res) => {
     } catch (err) {
       res.status(400).json(err);
     }
-  });
+});
 
 
-// PUT update a category
+// PUT update a category.
 router.put('/:id', async (req, res) => {
     try {
       const categoryData = await Category.update(req.body, {
@@ -96,7 +96,7 @@ router.put('/:id', async (req, res) => {
   });
 
 
-// DELETE a category
+// DELETE a category.
 router.delete('/:id', async (req, res) => {
     try {
       const categoryData = await Category.destroy({
