@@ -1,25 +1,22 @@
-
-    <title>Sweet Solution</title>
-
-<body class="d-flex h-100 text-center text-bg-dark login-form">
-  <div class="row justify-space-between-md">
-  <div class="login-card">
-    <h2 class="page-title">Login</h2>
-    <form class="form login-form">
-      <div class="form-group">
+<div class="form-row justify-space-between-md">
+  <div>
+    {{>signUp}}
+  </div>
+  <div>
+    <form class="user-form login-form">
+      <h1 class="page-title">Login</h1>
+      <div>
         <label for="email-login">Email:</label>
-        <input class="form-input" type="text" id="email-login" />
+        <input type="text" placeholder="Email" id="email-login" />
       </div>
-      <div class="form-group">
+      <div>
         <label for="password-login">Password:</label>
-        <input class="form-input" type="password" id="password-login" />
+        <input type="password" placeholder="Password" id="password-login" />
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">Login</button>
+      <div>
+        <button class="btn" type="submit">Login</button>
       </div>
     </form>
+
   </div>
-  {{>signUp}}
 </div>
-</body>
-    
