@@ -162,6 +162,14 @@ p {
   display: block;
 }
 
+.card {
+  border-radius: 20px!important;
+}
+
+.product-img {
+  border-radius: 20px;
+}
+
 #sidebar-wrapper {
   background-color: var(--light-blue);
   color: var(--grey);
