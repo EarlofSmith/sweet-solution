@@ -1,16 +1,29 @@
 const router = require('express').Router();
 const Product = require('../../models/Product'); 
 const Category = require('../../models/Category'); 
+const Review = require('../../models/Review');
 const auth = require('../../utils/Auth');
 
 
 // GET all products.
 router.get('/', async (req, res) => {
     try {
-      const productData = await Product.findAll(
-        {include: {model: Category}});
+      const productData = await Product.findAll({
+        include: [ 
+          {
+            model: Category
+          },
+          {
+            model: Review
+          }
+        ]
+      });
+      if(!productData) {
+        res.status(400).json({ message: 'No product found'})
+        return;
+      }
       res.status(200).json(productData);
-      const products = productData.map((product) => product.get({plain: true}));
+      // const products = productData.map((product) => product.get({plain: true}));
       // res.render('product-gallery', {products}); 
     } catch(err) {
       res.status(500).json(err);
@@ -25,8 +38,8 @@ router.get('/:id', async (req, res) => {
         {include: {model: Category}});
       if (productData) {
         res.status(200).json(productData);
-        const product = productData.get({plain: true});
-        res.render('product', {product});
+        // const product = productData.get({plain: true});
+        // res.render('product', {product});
       } else {
         res.status(404).json({message: 'There is not a product that has that ID.'});
         return;
