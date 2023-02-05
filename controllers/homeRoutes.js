@@ -73,24 +73,34 @@ router.get('/category', async (req, res) => {
     // console.log(JSON.parse(categories));
     console.table('categories', categories);
     // console.log('prods', productDetails);
-    res.render('product-gallery', {categories});
+    res.render('category-gallery', {categories});
   } catch(err) {
     res.status(400).json(err);
   }
 })
 
 
+
+
 // GET all products by specific category ID.
-router.get('/product/:category_id/:product_category_id', async (req, res) => {
+router.get('/product/category/:id', async (req, res) => {
   try {
     const productData = await Product.findAll({
-      where: {category_id: req.params.product_category_id}
+      where: {category_id: req.params.id},
+      include: 
+        { 
+          model: Category,
+          attributes: [
+            'id',
+            'category_name', 
+          ] 
+        }
     });
     if(productData) {
       const products = productData.map((product) => product.get({plain: true}));
-      //const products = productData.get({ plain: true });
-      res.render('product', {products});
-      //res.status(200).json(productData);
+
+      res.render('product-gallery', {products});
+      
     } else {
       res.status(400).json({message: 'There is not a product-category that has that ID.'});
       return;
