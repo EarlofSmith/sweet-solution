@@ -8,55 +8,54 @@
           data-id={{category.id}}>{{category.category_name}}</a>
         {{/each}}
       </div>
-    </div>   --}}
-      <!-- Page content wrapper-->
-      <div id="page-content-wrapper">
-        <!-- Page content-->
-        <div class="container-fluid p-3">
-          <h2></h2>
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {{#each products as |product|}}
-            <div class="col">
-              <div class="card shadow-sm">
-                <img class="product-img" width="auto" height="auto"
-                  src="/images/{{product.filename}}" role="img" 
-                  preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <title>{{product.product_name}}</title>
-                  {{!-- <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
-                    dy=".3em">Thumbnail</text> --}}
-                </img>
-                <div class="card-body">
-                  <p class="card-text">{{product.description}}</p>
-                  <p class="card-text">{{product.price_per}}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="dropdown">
-                      <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        How many?
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">1</a></li>
-                        <li><a class="dropdown-item" href="#">2</a></li>
-                        <li><a class="dropdown-item" href="#">3</a></li>
-                        <li><a class="dropdown-item" href="#">4</a></li>
-                        <li><a class="dropdown-item" href="#">5</a></li>
-                      </ul>
-                    </div>
+    </div> --}}
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+      <!-- Page content-->
+      <div class="container-fluid p-3">
+        <h2></h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {{#each products as |product|}}
+          <div class="col">
+            <div class="card shadow-sm">
+              <img class="product-img" width="auto" height="auto" src="/images/{{product.filename}}" role="img"
+                preserveAspectRatio="xMidYMid slice" focusable="false">
+              <title>{{product.product_name}}</title>
+              {{!-- <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                dy=".3em">Thumbnail</text> --}}
+              </img>
+              <div class="card-body">
+                <p class="card-text">{{product.description}}</p>
+                <p class="card-text">{{product.price_per}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      How many?
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">1</a></li>
+                      <li><a class="dropdown-item" href="#">2</a></li>
+                      <li><a class="dropdown-item" href="#">3</a></li>
+                      <li><a class="dropdown-item" href="#">4</a></li>
+                      <li><a class="dropdown-item" href="#">5</a></li>
+                    </ul>
                   </div>
                 </div>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                </div>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
               </div>
             </div>
           </div>
         </div>
-        {{/each}}
       </div>
+      {{/each}}
     </div>
   </div>
-</div>
-    <script src="/js/category.js"></script>
+  </div>
+  </div>
+
 </body>
 
 </html>
