@@ -1,15 +1,17 @@
-const categories = document.querySelector('.categories');
+// const categories = document.querySelector('.categories');
+const categories = document.getElementById('category-list-group');
 const productDiv = document.createElement('div')
 
 const categoryEventHandler = async (e) => {
-  // const categoryGroup = document.querySelector('#categoryGroup');
-  // const categories = categoryGroup.children();
-  // categories.forEach((category) => {console.log(category)})
-  const categoryId = e.target.dataset.id
-  const response = await fetch(`/api/category/${categoryId}`);
-  console.log(response); 
 
-  div.innerText = product.product_name;
+  const categoryId = e.target.dataset.id
+  const response = await fetch(`/api/category/${categoryId}`, {
+    method: 'GET', 
+  });
+  const json = await response.json();
+  console.log(json);  
+
+  // div.innerText = product.product_name;
   
 }
 

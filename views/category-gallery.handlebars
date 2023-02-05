@@ -1,32 +1,31 @@
 <body class="d-flex h-100 text-bg-dark">
   <div class="d-flex" id="wrapper">
-    {{!-- <div class="border-end p-3" id="sidebar-wrapper">
+    <div class="border-end p-3" id="sidebar-wrapper">
       <div class="list-group list-group-flush" id="category-list-group">
-        <a class="list-group-item list-group-item-action p-3" href="#!">All Products</a>
-        {{#each products as |category|}}
-        <a class="list-group-item list-group-item-action p-3 products" href="#!"
+        {{#each categories as |category|}}
+        <a class="list-group-item list-group-item-action p-3 categories" href="/product/category/{{category.id}}"
           data-id={{category.id}}>{{category.category_name}}</a>
         {{/each}}
       </div>
-    </div>   --}}
+    </div>  
       <!-- Page content wrapper-->
       <div id="page-content-wrapper">
         <!-- Page content-->
         <div class="container-fluid p-3">
           <h2></h2>
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {{#each products as |product|}}
+            {{#each categories as |category|}}
             <div class="col">
               <div class="card shadow-sm">
                 <img class="product-img" width="auto" height="auto"
                   src="/images/{{product.filename}}" role="img" 
                   preserveAspectRatio="xMidYMid slice" focusable="false">
                   <title>{{product.product_name}}</title>
-                  {{!-- <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
-                    dy=".3em">Thumbnail</text> --}}
+                  <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                    dy=".3em">{{category.category_name}}</text>
                 </img>
                 <div class="card-body">
-                  <p class="card-text">{{product.description}}</p>
+                  <p class="card-text">{{product.product_name}}</p>
                   <p class="card-text">{{product.price_per}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="dropdown">
