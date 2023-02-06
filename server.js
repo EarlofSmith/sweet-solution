@@ -28,6 +28,12 @@ const sess = {
 };
 
 app.use(session(sess));
+// TMK TEST
+app.use(function (req, res, next) {
+  res.locals.session = req.session;
+  next();
+})
+// TMK TEST
 
 // set up handlebars
 const hbs = exphbs.create({ helpers });
