@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../../models/User');
+const Review = require('../../models/Review')
 const bcrypt = require('bcrypt');
 const auth = require('../../utils/Auth');
 
@@ -36,7 +37,9 @@ router.post('/login', async (req, res) => {
 // GET all users.
 router.get('/',  async (req, res) => {
   try {
-    const userData = await User.findAll();
+    const userData = await User.findAll({
+      include: { model: Review }
+    });
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
@@ -47,7 +50,9 @@ router.get('/',  async (req, res) => {
 // GET one user.
 router.get('/:id',  async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id);
+    const userData = await User.findByPk(req.params.id, {
+      include: { model: Review }
+    });
     if (!userData) {
       res.status(404).json({ message: 'No user with this id!' });
       return;
