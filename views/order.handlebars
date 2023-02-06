@@ -1,42 +1,34 @@
-
-  
-    <header>Your Order[s]:</header>
-    <div>(if any)</div>
-    <br>
-    <br>
-      {{#if orders}}
-        {{#each orders as |order|}}
-        <div class="card background">  {{!--style="background width: 18rem;"> --}}
-          <br>
-          <br>
-          <div class="card-body">
-            <p class="card-text">Order ID: {{order.id}}</p>
-            <p class="card-text">Product ID: {{order.product_id}}</p>
-            <p class="card-text">Due Date: {{order.due_date}}</p>
-            <p class="card-text">Ordered Date: {{order.order_date}}</p>
-            <p class="card-text">Special Instructions: {{order.special_instructions}}</p>
-            <p class="card-text">Total Price: {{order.total_price}}</p>
-            {{#if order.order_details}}
-            {{#each order.order_details as |order_detail|}}
-              <p class="card-text">Order Quantity: {{order_detail.quantity}}</p>
-            {{/each}}
-            {{/if}}
-            {{#if order.products}}
-            {{#each order.products as |product|}}
-              <p class="card-text">PRODUCT NAME: {{product.product_name}}</p>
-              <p class="card-text">PRODUCT ID (REFERENCE): {{product.id}}</p>
-              {{!-- <p class="card-text">PRODUCT PICTURE {{product.filename}}</p> --}}
-              {{!-- {{#with product}} --}}
-              <img src="/images/{{product.filename}}" class="card-img-top" style="width: 25%; height: 25%;" alt="...">
-              {{!-- {{/with}} --}}
-            {{/each}}
-            {{/if}}
-          </div>
-        </div>
-        {{/each}}
-      {{else}}
-        <p class="card-text">There currently are not any orders for your user ID.</p>
-      {{/if}}
-   
-
-
+<h1>Orders</h1>
+{{#if orders}}
+{{#each orders as |order|}}
+<div class="order-card"> {{!--style="background width: 18rem;"> --}}
+  <br>
+  <br>
+  <div class="order-border">
+    {{!-- <p class="card-text">Order ID: {{order.id}}</p> --}}
+    {{!-- <p class="card-text">Product ID: {{order.product_id}}</p> --}}
+    {{#if order.products}}
+    {{#each order.products as |product|}}
+    <p class="card-text">Product: {{product.product_name}}</p>
+    {{!-- <p class="card-text">PRODUCT ID (REFERENCE): {{product.id}}</p> --}}
+    {{!-- <p class="card-text">PRODUCT PICTURE {{product.filename}}</p> --}}
+    {{!-- {{#with product}} --}}
+    <img src="/images/{{product.filename}}" class="card-img-top" style="width: 25%; height: 25%;" alt="...">
+    {{!-- {{/with}} --}}
+    {{/each}}
+    {{/if}}
+    {{#if order.order_details}}
+    {{#each order.order_details as |order_detail|}}
+    <p class="card-text">Order Quantity: {{order_detail.quantity}}</p>
+    {{/each}}
+    {{/if}}
+    <p class="card-text">Total Price: ${{order.total_price}}</p>
+    <p class="card-text">Special Instructions: {{order.special_instructions}}</p>
+    <p class="card-text">Due Date: {{order.due_date}}</p>
+    <p class="card-text">Ordered Date: {{order.order_date}}</p>
+  </div>
+</div>
+{{/each}}
+{{else}}
+<p class="card-text">There currently are not any orders for your user ID.</p>
+{{/if}}
