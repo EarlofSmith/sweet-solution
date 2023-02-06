@@ -7,6 +7,7 @@
   <!-- Page content-->
   <div class="container-fluid p-3">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <!-- Product cards -->
       {{#each products as |product|}}
       <div class="col">
         <div class="card shadow-sm">
@@ -15,8 +16,8 @@
           </img>
           <div class="card-body">
             <h3 class="product-card-text">{{product.product_name}}</h3>
-            <p class="card-text">{{product.price_per}}</p>
-            <button type="button" class="btn btn-lg my-2">Add to Cart</button>
+            <p class="card-text">${{product.price_per}} each</p>
+            <a type="button" class="btn btn-lg my-2" id="{{product.id}}">Add to Cart</a>
             <a type="button" class="btn btn-lg my-2" href="/review/product/{{product.id}}">See Reviews</a>
           </div>
         </div>
