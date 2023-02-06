@@ -9,9 +9,9 @@
       {{#each categories as |category|}}
       <div class="col">
         <div class="card shadow-sm">
-          <img class="product-img" width="auto" height="auto" src="/images/{{category.filename}}" role="img"
+          {{!-- <img class="product-img" width="auto" height="auto" src="/images/{{category.filename}}" role="img"
             preserveAspectRatio="xMidYMid slice" focusable="false">
-          </img>
+          </img> --}}
           <div class="card-body">
             <h3 class="card-text">{{category.category_name}}</h3>
             <a type="button" class="btn btn-lg my-2" href="/product/category/{{category.id}}">See Products</a>

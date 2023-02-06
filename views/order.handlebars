@@ -4,17 +4,19 @@
     <div>Here is your order</div>
     
         {{#each orders as |order|}}
-        <div class="card" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
+        <div class="card background" style="background width: 18rem;">
+          {{#with product}}
+          <img src="{{product.filename}}" class="card-img-top" alt="...">
+          {{/with}}
           <div class="card-body">
             <p class="card-text">{{order.product_id}}</p>
             <p class="card-text">Due date:{{order.due_date}}</p>
             <p class="card-text">Ordered Date:{{order.order_date}}</p>
             <p class="card-text">Special Instructions:{{order.special_instructions}}</p>
             <p class="card-text">Total Price:{{order.total_price}}</p>
+          </div>
         </div>
-    </div>
-    {{/each}}
+        {{/each}}
    
 
 
