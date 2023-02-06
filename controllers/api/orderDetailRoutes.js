@@ -8,8 +8,6 @@ router.get('/', async (req, res) => {
   try {
     const Order_DetailData = await Order_Detail.findAll();
     res.status(200).json(Order_DetailData);
-    const Order_Details = Order_DetailData.map((Order_Detail) => Order_Detail.get({plain: true}));
-    // res.render('order', {Order_Details});
   } catch(err) {
     res.status(500).json(err);
   };
@@ -20,15 +18,12 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const Order_DetailData = await Order_Detail.findByPk(req.params.id);
-    if (Order_DetailData){
-      res.status(200).json(Order_DetailData);
-      const Order_Details = Order_DetailData.get({plain: true});
-      //res.render('order_detail', {Order_Details});
-    }
-    else {
-      res.status(400).json({message: 'There is not an order details record that has that id.'});
+    if (!Order_DetailData){
+      res.status(404).json({message: 'There is not an order details record that has that id.'});
       return;
     }
+
+    res.status(200).json(Order_DetailData);  
   } catch(err) {
     res.status(500).json(err);
   }

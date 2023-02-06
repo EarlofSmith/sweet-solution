@@ -7,7 +7,24 @@ const auth = require('../../utils/Auth');
 router.get('/', async (req, res) => {
   try {
     const OrderData = await Order.findAll({
-      include: [{model: Order_Detail, attributes: ['quantity']}]
+      include: [
+        {
+          model: Order_Detail
+        },
+        {
+          model: User,
+          attributes: [
+            'id',
+            'first_name',
+            'last_name',
+            'email',
+            'phone_number'
+          ]
+        },
+        {
+          model: Product
+        }
+      ]
     });
     if(!OrderData) {
       res.status(400).json({ message: 'No Order found'})
@@ -24,7 +41,26 @@ router.get('/', async (req, res) => {
 // Route to get an order by specific ID.
 router.get('/:id', async (req, res) => {
   try {
-    const orderData = await Order.findByPk(req.params.id);
+    const orderData = await Order.findByPk(req.params.id, {
+      include: [
+        {
+          model: Order_Detail
+        },
+        {
+          model: User,
+          attributes: [
+            'id',
+            'first_name',
+            'last_name',
+            'email',
+            'phone_number'
+          ]
+        },
+        {
+          model: Product
+        }
+      ]
+    });
     if(!orderData) {
       res.status(400).json({ message: 'No order with that id!'});
       return;
