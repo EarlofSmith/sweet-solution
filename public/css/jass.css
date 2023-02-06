@@ -31,9 +31,35 @@ p {
   font-family: 'Montserrat', sans-serif;
 }
 
-.whisk {
+.whisk-logo {
   rotate: 45deg;
+  width: fit-content;
+  height: fit-content;
 }
+
+@media screen and (min-width: 320px) and (max-width: 768px){
+  .whisk-logo {
+    rotate: 40deg;
+    height: 45%;
+    width: 60%
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  .whisk-logo {
+    rotate: 40deg;
+    height: 30%;
+    width: 50%
+  }
+}
+
+@media screen and (max-width: 1025px) and (min-width: 1510px){
+  .whisk-logo {
+    rotate: 40deg;
+    width: 40%;
+  }
+}
+
 
 /* global css for buttons except for login button */
 
@@ -77,9 +103,9 @@ p {
 /* LOGIN FORM CSS */
 
 .form-row {
-  background-color: var(--form-background);
+  /* background-color: var(--form-background);
   border: 1px solid var(--dark-brown);
-  border-radius: 2px;
+  border-radius: 2px; */
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -222,8 +248,8 @@ p {
 
 @media screen and (min-width: 320px) and (max-width: 768px){
   .form-row{
-    background-color: var(--form-background);
-    border: 1px solid var(--dark-brown);
+    /* background-color: var(--form-background);
+    border: 1px solid var(--dark-brown); */
     border-radius: 2px;
     display: flex;
     flex-direction: column-reverse;
@@ -234,12 +260,24 @@ p {
 
 @media screen and (min-width: 768px) and (max-width: 1024px){
   .form-row{
-    background-color: var(--form-background);
-    border: 1px solid var(--dark-brown);
+    /* background-color: var(--form-background);
+    border: 1px solid var(--dark-brown); */
     border-radius: 2px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: auto; 
+  }
+}
+
+@media screen and (max-width: 1025px) and (min-width: 1510px){
+  .form-row{
+    /* background-color: var(--form-background);
+    border: 1px solid var(--dark-brown); */
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: auto; 
   }
 }
