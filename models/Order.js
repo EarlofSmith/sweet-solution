@@ -53,7 +53,6 @@ Order.init(
     {
       hooks: {  
         beforeCreate: async (newOrderData) => {
-          //console.log("HOOK: BEFORE CREATE");
           //
           // ** NEW SYSTEM TECHNOLOGY **:
           //
@@ -62,10 +61,7 @@ Order.init(
           // manipulate the "order_date" value by adding 3 processing/baking days to the 
           // involved order date to create the involved "due_date" field value.
           //
-          //console.log(newOrderData.order_date);
-          //console.log(newOrderData.due_date);
-          //console.log(moment().toDate());
-          //console.log(moment().add(3, 'days').toDate());
+
           newOrderData.order_date = moment().toDate();  // NEW SYSTEM TECHNOLOGY
           newOrderData.due_date = moment().add(3, 'days').toDate();  // NEW SYSTEM TECHNOLOGY
           //

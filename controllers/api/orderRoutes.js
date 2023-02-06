@@ -79,8 +79,6 @@ router.post('/', async (req, res) => {  // TO-DO: Re-add "auth,".
       const orderData = await Order.create({
         user_id: req.body.user_id, 
         product_id: req.body.product_id, 
-        //due_date: req.body.due_date, 
-        //order_date: req.body.order_date,
         special_instructions: req.body.special_instructions,
         total_price: req.body.total_price,
       });

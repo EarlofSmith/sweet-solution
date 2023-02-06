@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const auth = require('../utils/Auth');
 const Category = require('../models/Category');
-const {Product, Order, Order_Detail} = require('../models');
+const {Product, Order, Order_Detail, User} = require('../models');
 const Review = require('../models/Review');
 // router.use('/', homeRoutes);
 
@@ -29,7 +29,7 @@ router.get('/login', async (req, res) => {
 });
 
 
-// GET all products.
+// GET all products, public view
 router.get('/product', (req, res) => {
   Product.findAll().then((productData) => {
     const products = productData.map((product) => product.get({ plain: true }));
@@ -40,6 +40,7 @@ router.get('/product', (req, res) => {
 });
 
 
+// GET all categories, public view
 router.get('/category', async (req, res) => {
   //console.log('test')
   try {
@@ -96,29 +97,31 @@ router.get('/product/category/:id', async (req, res) => {
 });
 
 
-// GET a Category by specific category id and then get related products.
-router.get('/category/:category_id/:product_category_id', async (req, res) => {
-  try {
-    const categoryData = await Category.findAll({
-      attributes: ['category_name'], 
-      where: {id: req.params.category_id}, 
-      include: [{model: Product, where: {category_id: req.params.category_id}}]
-    });
-    if(categoryData) {
-      const category = categoryData.map((category) => category.get({plain: true}));
-      //const category = categoryData.get({ plain: true });
-      res.render('category', {category});
-      //res.status(200).json(categoryData);
-    } else {
-      res.status(400).json({message: 'No category-product combination with that ID!'});
-      return;
-    }
-  } catch(err) {
-    res.status(500).json(err)
-  }
-});
+// GET a Category by specific category id and then get related products. 
+// WE DID NOT USE THIS ROUTE
+// router.get('/category/:category_id/:product_category_id', async (req, res) => {
+//   try {
+//     const categoryData = await Category.findAll({
+//       attributes: ['category_name'], 
+//       where: {id: req.params.category_id}, 
+//       include: [{model: Product, where: {category_id: req.params.category_id}}]
+//     });
+//     if(categoryData) {
+//       const category = categoryData.map((category) => category.get({plain: true}));
+//       //const category = categoryData.get({ plain: true });
+//       res.render('category', {category});
+//       //res.status(200).json(categoryData);
+//     } else {
+//       res.status(400).json({message: 'No category-product combination with that ID!'});
+//       return;
+//     }
+//   } catch(err) {
+//     res.status(500).json(err)
+//   }
+// });
 
 
+// GET all orders - for demonstration
 router.get('/Order', (req, res) => {
   Order.findAll().then((orderData) => {
     const orders = orderData.map((order) => order.get({ plain: true }));
@@ -129,6 +132,8 @@ router.get('/Order', (req, res) => {
 });
 
 
+
+// GET all orders for a specific user
 router.get('/order/user/:id', async (req, res) => {
   try {
     const orderData = await Order.findAll({
@@ -137,16 +142,7 @@ router.get('/order/user/:id', async (req, res) => {
       });
     if(orderData) {
       const orders = orderData.map((order) => order.get({plain: true}));
-      //console.log("!!!!!!!!!");
-      //console.log(order.products[0].product_name);
-      //console.log(order.products[0].filename);
-      //console.log(order);
-      //console.log("!!!!!!!!!");
-      //}
-      //);
-      //const order = orderData.get({ plain: true });
       res.render('order', {orders});
-      //res.status(200).json(orderData);
     } else {
       res.status(400).json({message: 'There is not any order information that has that user ID (' + req.params.id + ').'});
       return;
@@ -161,7 +157,8 @@ router.get('/order/user/:id', async (req, res) => {
 router.get('/review/product/:id', async (req, res) => {
   try {
     const reviewData = await Review.findAll({
-      where: {product_id: req.params.id}
+      where: {product_id: req.params.id}, 
+      include: [{model: Product}, {model: User, attributes: {exclude: 'password'} }]
     });
     if(reviewData) {
       const reviews = reviewData.map((review) => review.get({plain: true}));
@@ -176,6 +173,7 @@ router.get('/review/product/:id', async (req, res) => {
 });
 
 
+// GET all reviews for a product with a certain ID
 router.get('/review/product/:id', async (req, res) => {
   try {
     const reviewData = await Review.findAll({
