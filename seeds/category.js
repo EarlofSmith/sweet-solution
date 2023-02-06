@@ -2,28 +2,36 @@ const { Category } = require('../models');
 
 const categoryData = [
     {
-        category_name: "cookie"
+        category_name: "Cookies",
+        filename: "cookies-thumb.jpg", 
     },
     {
-        category_name: "pie"
+        category_name: "Pies",
+        filename: "pies-thumb.jpg", 
     },
     {
-        category_name: "cake"
+        category_name: "Cakes",
+        filename: "cakes-thumb.jpg", 
     },
     {
-        category_name: "cheesecake"
+        category_name: "Cheesecakes",
+        filename: "cheesecakes-thumb.jpg", 
     },
     {
-        category_name: "pastry"
+        category_name: "Pastries",
+        filename: "pastries-thumb.jpg", 
     },
     {
-        category_name: "bread"
+        category_name: "Bread",
+        filename: "bread-thumb.jpg", 
     },
     {
-        category_name: "gluten-free"
+        category_name: "Gluten-Free",
+        filename: "gf-thumb.jpg", 
     },
     {
-        category_name: "vegan"
+        category_name: "Vegan",
+        filename: "vegan-thumb.jpg", 
     }
 ]; 
 
