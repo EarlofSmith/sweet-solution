@@ -12,8 +12,7 @@ router.get('/', async (req, res) => {
       //     (category) => category.get({ plain: true }));
       //res.status(200).json(categories);
       //res.render('<model type>', { <model type> });
-      res.render("homepage", {
-          
+      res.render("homepage", {      
           loggedIn: req.session.loggedIn
       });
   } catch(err) {
@@ -37,14 +36,12 @@ router.get('/product', (req, res) => {
   .catch((err => res.status(400).json(err)));
 
   // console.log('aiuuhfuashdfu')
-  // try {
-      
+  // try {  
   //     const productData = await Product.findAll();
   //     // res.status(200).json(productData);
   //     const product = productData.map((product) => product.get({ plain: true }));
   //     console.log(product, 'Some product text');
   //     res.render('product-gallery', {product}); 
-
   // } catch(err) {
   //   res.status(500).json(err);
   // };
@@ -80,8 +77,6 @@ router.get('/category', async (req, res) => {
 })
 
 
-
-
 // GET all products by specific category ID.
 router.get('/product/category/:id', async (req, res) => {
   try {
@@ -98,9 +93,7 @@ router.get('/product/category/:id', async (req, res) => {
     });
     if(productData) {
       const products = productData.map((product) => product.get({plain: true}));
-
       res.render('product-gallery', {products});
-      
     } else {
       res.status(400).json({message: 'There is not a product-category that has that ID.'});
       return;
@@ -142,6 +135,25 @@ router.get('/Order', (req, res) => {
     res.render('order', { orders });
   })
   .catch((err => res.status(400).json(err)));
+});
+
+
+// GET all reviews by specific product ID.
+router.get('/reviews/product/:id', async (req, res) => {
+  try {
+    const reviewData = await Review.findAll({
+      where: {product_id: req.params.id}
+    });
+    if(reviewData) {
+      const reviews = reviewData.map((review) => review.get({plain: true}));
+      res.render('reviews', {reviews});
+    } else {
+      res.status(400).json({message: 'There is not a review that is for that product ID.'});
+      return;
+    }
+  } catch(err) {
+    res.status(500).json(err)
+  }
 });
 
 
