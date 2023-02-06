@@ -8,6 +8,8 @@
   --btn-color-gradiant-light: rgba(144, 190, 171, 0.5);
   --btn-color-gradiant-dark: rgba(109, 144, 129, 0.7); 
   --placeholder-color: rgba(74, 47, 13, 0.52);
+  --light-card-background: #ffffe594;
+  --light-card-border: #d8d8c9;
 }
 
 body {
@@ -15,20 +17,44 @@ body {
   color: var(--dark-brown); 
 }
 
+h1 {
+  color: var(--dark-brown); 
+  font-family: 'Amatic SC', cursive;
+  font-size: 500%;
+}
+
 h3 {
   color: var(--dark-brown); 
   font-family: 'Amatic SC', cursive;
 }
 
-.background {
-  background-image: url(../images/logo_500x300.png);
+/* .background {
+  background-image: url(../images/logo.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  opacity: .3;
+} */
+p {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.order-card{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
   font-weight: bolder;
   font-size: x-large;
   text-shadow: black 1px 1px;
   color: var(--green);
+  margin: auto;
 }
-p {
-  font-family: 'Montserrat', sans-serif;
+
+.order-border{
+  border: 1px solid var(--light-card-border);
+  border-radius: 4px;
+  padding: 1em;
+  background-color: var(--light-card-background);
 }
 
 .whisk-logo {
