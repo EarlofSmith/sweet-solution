@@ -58,14 +58,12 @@ p {
 }
 
 .whisk-logo {
-  rotate: 45deg;
   width: fit-content;
   height: fit-content;
 }
 
 @media screen and (min-width: 320px) and (max-width: 768px){
   .whisk-logo {
-    rotate: 40deg;
     height: 45%;
     width: 60%
   }
@@ -73,7 +71,6 @@ p {
 
 @media screen and (min-width: 768px) and (max-width: 1024px){
   .whisk-logo {
-    rotate: 40deg;
     height: 30%;
     width: 50%
   }
@@ -81,7 +78,6 @@ p {
 
 @media screen and (max-width: 1025px) and (min-width: 1510px){
   .whisk-logo {
-    rotate: 40deg;
     width: 40%;
   }
 }
