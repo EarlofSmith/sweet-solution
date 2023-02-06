@@ -7,11 +7,6 @@ const {Product, Order} = require('../models')
 
 router.get('/', async (req, res) => {
   try {
-      // const categoriesData = await Category.findAll();
-      // const categories = categoriesData.map(
-      //     (category) => category.get({ plain: true }));
-      //res.status(200).json(categories);
-      //res.render('<model type>', { <model type> });
       res.render("homepage", {      
           loggedIn: req.session.loggedIn
       });
@@ -34,17 +29,6 @@ router.get('/product', (req, res) => {
     res.render('product-gallery', { products });
   })
   .catch((err => res.status(400).json(err)));
-
-  // console.log('aiuuhfuashdfu')
-  // try {  
-  //     const productData = await Product.findAll();
-  //     // res.status(200).json(productData);
-  //     const product = productData.map((product) => product.get({ plain: true }));
-  //     console.log(product, 'Some product text');
-  //     res.render('product-gallery', {product}); 
-  // } catch(err) {
-  //   res.status(500).json(err);
-  // };
 });
 
 
@@ -139,7 +123,7 @@ router.get('/Order', (req, res) => {
 
 
 // GET all reviews by specific product ID.
-router.get('/reviews/product/:id', async (req, res) => {
+router.get('/review/product/:id', async (req, res) => {
   try {
     const reviewData = await Review.findAll({
       where: {product_id: req.params.id}
