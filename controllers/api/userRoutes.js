@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const User = require('../../models/User');
-const Review = require('../../models/Review')
+const Review = require('../../models/Review');
 const bcrypt = require('bcrypt');
 const auth = require('../../utils/Auth');
 
@@ -25,7 +25,22 @@ router.post('/login', async (req, res) => {
             return; 
         }
         req.session.save(() => {
+            //
+            req.session['loggedOnUserEmail'] = userDb.email;
+            req.session['loggedOnUserID'] = userDb.id;
+            req.session['loggedOnUserFirstName'] = userDb.first_name;
+            req.session['loggedOnUserLastName'] = userDb.last_name;
+            req.session['loggedOnUserFullName'] = userDb.first_name + " " + userDb.last_name;
+            //
+            //console.log(req.session['loggedOnUserEmail']);
+            //console.log(req.session['loggedOnUserID']);
+            //console.log(req.session['loggedOnUserFirstName']);
+            //console.log(req.session['loggedOnUserLastName']);
+            //console.log(req.session['loggedOnUserFullName']);
+            //
             req.session.loggedIn = true;
+            res.session = req.session;
+            console.log("!!!!!!!!!!!!!!!!!!! UserRoute LOGON SUCCESSFUL !!!!!!!!!!!!!!!!!!!");
             res.status(200).json({message: 'Login succeeded.'});
         });
     } catch(err) {
