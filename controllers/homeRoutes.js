@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const auth = require('../utils/Auth');
-const Category = require('../models/Category')
-const {Product, Order} = require('../models')
+const Category = require('../models/Category');
+const {Product, Order} = require('../models');
+const Review = require('../models/Review');
 // router.use('/', homeRoutes);
 
 
