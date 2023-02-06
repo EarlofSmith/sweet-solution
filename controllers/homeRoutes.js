@@ -141,4 +141,22 @@ router.get('/review/product/:id', async (req, res) => {
 });
 
 
+router.get('/review/product/:id', async (req, res) => {
+  try {
+    const reviewData = await Review.findAll({
+      where: {product_id: req.params.id}
+    });
+    if(reviewData) {
+      const reviews = reviewData.map((review) => review.get({plain: true}));
+      res.render('reviews', {reviews});
+    } else {
+      res.status(400).json({message: 'There is not a review that is for that product ID.'});
+      return;
+    }
+  } catch(err) {
+    res.status(500).json(err)
+  }
+});
+
+
 module.exports = router;
