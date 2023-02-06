@@ -24,7 +24,8 @@ h3 {
   background-image: url(../images/logo_500x300.png);
   font-weight: bolder;
   font-size: x-large;
-  text-shadow: #f8f8f3 1px 1px;
+  text-shadow: black 1px 1px;
+  color: var(--green);
 }
 p {
   font-family: 'Montserrat', sans-serif;
