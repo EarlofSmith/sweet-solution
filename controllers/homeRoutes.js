@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const auth = require('../utils/Auth');
 const Category = require('../models/Category');
-const {Product, Order} = require('../models');
+const {Product, Order, Order_Detail} = require('../models');
 const Review = require('../models/Review');
 // router.use('/', homeRoutes);
 
@@ -9,7 +9,14 @@ const Review = require('../models/Review');
 router.get('/', async (req, res) => {
   try {
       res.render("homepage", {      
-          loggedIn: req.session.loggedIn
+          loggedIn: req.session.loggedIn, 
+          //
+          loggedOnUserEmail: req.session.loggedOnUserEmail, 
+          loggedOnUserID: req.session.loggedOnUserID, 
+          loggedOnUserFirstName: req.session.loggedOnUserFirstName, 
+          loggedOnUserLastName: req.session.loggedOnUserLastName, 
+          loggedOnUserFullName: req.session.loggedOnUserFullName, 
+          //
       });
   } catch(err) {
       res.status(500).json({message: "An error occurred, please try again. If problem persists, contact us"});
@@ -34,7 +41,7 @@ router.get('/product', (req, res) => {
 
 
 router.get('/category', async (req, res) => {
-  console.log('test')
+  //console.log('test')
   try {
     const categoryData = await Category.findAll({
       include: 
@@ -95,8 +102,7 @@ router.get('/category/:category_id/:product_category_id', async (req, res) => {
     const categoryData = await Category.findAll({
       attributes: ['category_name'], 
       where: {id: req.params.category_id}, 
-      include: [
-      {model: Product, where: {category_id: req.params.category_id}}]
+      include: [{model: Product, where: {category_id: req.params.category_id}}]
     });
     if(categoryData) {
       const category = categoryData.map((category) => category.get({plain: true}));
@@ -116,10 +122,38 @@ router.get('/category/:category_id/:product_category_id', async (req, res) => {
 router.get('/Order', (req, res) => {
   Order.findAll().then((orderData) => {
     const orders = orderData.map((order) => order.get({ plain: true }));
-    console.log('these are the Orders hopefully', orders);
+    //console.log('these are the Orders hopefully', orders);
     res.render('order', { orders });
   })
   .catch((err => res.status(400).json(err)));
+});
+
+
+router.get('/order/user/:id', async (req, res) => {
+  try {
+    const orderData = await Order.findAll({
+      where: {user_id: req.params.id}, 
+      include: [{model: Product}, {model: Order_Detail}]
+      });
+    if(orderData) {
+      const orders = orderData.map((order) => order.get({plain: true}));
+      //console.log("!!!!!!!!!");
+      //console.log(order.products[0].product_name);
+      //console.log(order.products[0].filename);
+      //console.log(order);
+      //console.log("!!!!!!!!!");
+      //}
+      //);
+      //const order = orderData.get({ plain: true });
+      res.render('order', {orders});
+      //res.status(200).json(orderData);
+    } else {
+      res.status(400).json({message: 'There is not any order information that has that user ID (' + req.params.id + ').'});
+      return;
+    }
+  } catch(err) {
+    res.status(500).json(err)
+  }
 });
 
 
