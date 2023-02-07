@@ -7,7 +7,24 @@ const auth = require('../../utils/Auth');
 router.get('/', async (req, res) => {
   try {
     const OrderData = await Order.findAll({
-      include: [{model: Order_Detail, attributes: ['quantity']}]
+      include: [
+        {
+          model: Order_Detail
+        },
+        {
+          model: User,
+          attributes: [
+            'id',
+            'first_name',
+            'last_name',
+            'email',
+            'phone_number'
+          ]
+        },
+        {
+          model: Product
+        }
+      ]
     });
     if(!OrderData) {
       res.status(400).json({ message: 'No Order found'})
@@ -24,7 +41,26 @@ router.get('/', async (req, res) => {
 // Route to get an order by specific ID.
 router.get('/:id', async (req, res) => {
   try {
-    const orderData = await Order.findByPk(req.params.id);
+    const orderData = await Order.findByPk(req.params.id, {
+      include: [
+        {
+          model: Order_Detail
+        },
+        {
+          model: User,
+          attributes: [
+            'id',
+            'first_name',
+            'last_name',
+            'email',
+            'phone_number'
+          ]
+        },
+        {
+          model: Product
+        }
+      ]
+    });
     if(!orderData) {
       res.status(400).json({ message: 'No order with that id!'});
       return;
@@ -43,8 +79,6 @@ router.post('/', async (req, res) => {  // TO-DO: Re-add "auth,".
       const orderData = await Order.create({
         user_id: req.body.user_id, 
         product_id: req.body.product_id, 
-        //due_date: req.body.due_date, 
-        //order_date: req.body.order_date,
         special_instructions: req.body.special_instructions,
         total_price: req.body.total_price,
       });

@@ -34,6 +34,26 @@ router.get('/:id', async (req, res) => {
 });
 
 
+// GET all reviews by specific product ID.
+router.get('/product/:id', async (req, res) => {
+  try {
+    const reviewData = await Review.findAll({
+      where: {product_id: req.params.id}, 
+    });
+    if(reviewData) {
+      res.status(200).json(reviewData);
+      const reviews = reviewData.map((review) => review.get({plain: true}));
+      //res.render('reviews', {reviews});
+    } else {
+      res.status(400).json({message: 'There is not a review that is for that product ID.'});
+      return;
+    }
+  } catch(err) {
+    res.status(500).json(err)
+  }
+});
+
+
 // create a new review / review body
 // {
 //    "product_id": 1,   
@@ -66,11 +86,16 @@ router.put('/:id', async (req, res) => {
         where: {
           id: req.params.id,
         }
+      });
+      if (!reviewData[0]) {
+        res.status(404).json({message: 'There is not a review that has that ID.'});
+        return;
       }
-    )
-  } catch (err) {
-  }
-})
+      res.status(200).json({message: 'The selected review was updated.'});
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
 
 
 // Delete a review by ID.

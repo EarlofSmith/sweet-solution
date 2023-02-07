@@ -28,6 +28,12 @@ const sess = {
 };
 
 app.use(session(sess));
+// TMK TEST
+app.use(function (req, res, next) {
+  res.locals.session = req.session;
+  next();
+})
+// TMK TEST
 
 // set up handlebars
 const hbs = exphbs.create({ helpers });
@@ -42,7 +48,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(routes);
 
 // sync orm to the datasource
-sequelize.sync({ force: false}).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
 });
 

@@ -1,20 +1,22 @@
 const router = require('express').Router();
-const auth = require('../utils/auth');
-const Category = require('../models/Category')
-const {Product, Order} = require('../models')
+const auth = require('../utils/Auth');
+const Category = require('../models/Category');
+const {Product, Order, Order_Detail, User} = require('../models');
+const Review = require('../models/Review');
 // router.use('/', homeRoutes);
 
 
 router.get('/', async (req, res) => {
   try {
-      // const categoriesData = await Category.findAll();
-      // const categories = categoriesData.map(
-      //     (category) => category.get({ plain: true }));
-      //res.status(200).json(categories);
-      //res.render('<model type>', { <model type> });
-      res.render("homepage", {
-          
-          loggedIn: req.session.loggedIn
+      res.render("homepage", {      
+          loggedIn: req.session.loggedIn, 
+          //
+          loggedOnUserEmail: req.session.loggedOnUserEmail, 
+          loggedOnUserID: req.session.loggedOnUserID, 
+          loggedOnUserFirstName: req.session.loggedOnUserFirstName, 
+          loggedOnUserLastName: req.session.loggedOnUserLastName, 
+          loggedOnUserFullName: req.session.loggedOnUserFullName, 
+          //
       });
   } catch(err) {
       res.status(500).json({message: "An error occurred, please try again. If problem persists, contact us"});
@@ -27,7 +29,7 @@ router.get('/login', async (req, res) => {
 });
 
 
-// GET all products.
+// GET all products, public view
 router.get('/product', (req, res) => {
   Product.findAll().then((productData) => {
     const products = productData.map((product) => product.get({ plain: true }));
@@ -35,24 +37,12 @@ router.get('/product', (req, res) => {
     res.render('product-gallery', { products });
   })
   .catch((err => res.status(400).json(err)));
-
-  // console.log('aiuuhfuashdfu')
-  // try {
-      
-  //     const productData = await Product.findAll();
-  //     // res.status(200).json(productData);
-  //     const product = productData.map((product) => product.get({ plain: true }));
-  //     console.log(product, 'Some product text');
-  //     res.render('product-gallery', {product}); 
-
-  // } catch(err) {
-  //   res.status(500).json(err);
-  // };
 });
 
 
+// GET all categories, public view
 router.get('/category', async (req, res) => {
-  console.log('test')
+  //console.log('test')
   try {
     const categoryData = await Category.findAll({
       include: 
@@ -73,7 +63,7 @@ router.get('/category', async (req, res) => {
     // console.log(JSON.parse(categories));
     console.table('categories', categories);
     // console.log('prods', productDetails);
-    res.render('product-gallery', {categories});
+    res.render('category-gallery', {categories});
   } catch(err) {
     res.status(400).json(err);
   }
@@ -81,16 +71,22 @@ router.get('/category', async (req, res) => {
 
 
 // GET all products by specific category ID.
-router.get('/product/:category_id/:product_category_id', async (req, res) => {
+router.get('/product/category/:id', async (req, res) => {
   try {
     const productData = await Product.findAll({
-      where: {category_id: req.params.product_category_id}
+      where: {category_id: req.params.id},
+      include: 
+        { 
+          model: Category,
+          attributes: [
+            'id',
+            'category_name', 
+          ] 
+        }
     });
     if(productData) {
       const products = productData.map((product) => product.get({plain: true}));
-      //const products = productData.get({ plain: true });
-      res.render('product', {products});
-      //res.status(200).json(productData);
+      res.render('product-gallery', {products});
     } else {
       res.status(400).json({message: 'There is not a product-category that has that ID.'});
       return;
@@ -101,22 +97,54 @@ router.get('/product/:category_id/:product_category_id', async (req, res) => {
 });
 
 
-// GET a Category by specific category id and then get related products.
-router.get('/category/:category_id/:product_category_id', async (req, res) => {
+// GET a Category by specific category id and then get related products. 
+// WE DID NOT USE THIS ROUTE
+// router.get('/category/:category_id/:product_category_id', async (req, res) => {
+//   try {
+//     const categoryData = await Category.findAll({
+//       attributes: ['category_name'], 
+//       where: {id: req.params.category_id}, 
+//       include: [{model: Product, where: {category_id: req.params.category_id}}]
+//     });
+//     if(categoryData) {
+//       const category = categoryData.map((category) => category.get({plain: true}));
+//       //const category = categoryData.get({ plain: true });
+//       res.render('category', {category});
+//       //res.status(200).json(categoryData);
+//     } else {
+//       res.status(400).json({message: 'No category-product combination with that ID!'});
+//       return;
+//     }
+//   } catch(err) {
+//     res.status(500).json(err)
+//   }
+// });
+
+
+// GET all orders - for demonstration
+router.get('/Order', (req, res) => {
+  Order.findAll().then((orderData) => {
+    const orders = orderData.map((order) => order.get({ plain: true }));
+    //console.log('these are the Orders hopefully', orders);
+    res.render('order', { orders });
+  })
+  .catch((err => res.status(400).json(err)));
+});
+
+
+
+// GET all orders for a specific user
+router.get('/order/user/:id', async (req, res) => {
   try {
-    const categoryData = await Category.findAll({
-      attributes: ['category_name'], 
-      where: {id: req.params.category_id}, 
-      include: [
-      {model: Product, where: {category_id: req.params.category_id}}]
-    });
-    if(categoryData) {
-      const category = categoryData.map((category) => category.get({plain: true}));
-      //const category = categoryData.get({ plain: true });
-      res.render('category', {category});
-      //res.status(200).json(categoryData);
+    const orderData = await Order.findAll({
+      where: {user_id: req.params.id}, 
+      include: [{model: Product}, {model: Order_Detail}]
+      });
+    if(orderData) {
+      const orders = orderData.map((order) => order.get({plain: true}));
+      res.render('order', {orders});
     } else {
-      res.status(400).json({message: 'No category-product combination with that ID!'});
+      res.status(400).json({message: 'There is not any order information that has that user ID (' + req.params.id + ').'});
       return;
     }
   } catch(err) {
@@ -125,13 +153,42 @@ router.get('/category/:category_id/:product_category_id', async (req, res) => {
 });
 
 
-router.get('/Order', (req, res) => {
-  Order.findAll().then((orderData) => {
-    const orders = orderData.map((order) => order.get({ plain: true }));
-    console.log('these are the Orders hopefully', orders);
-    res.render('order', { orders });
-  })
-  .catch((err => res.status(400).json(err)));
+// GET all reviews by specific product ID.
+router.get('/review/product/:id', async (req, res) => {
+  try {
+    const reviewData = await Review.findAll({
+      where: {product_id: req.params.id}, 
+      include: [{model: Product}, {model: User, attributes: {exclude: 'password'} }]
+    });
+    if(reviewData) {
+      const reviews = reviewData.map((review) => review.get({plain: true}));
+      res.render('reviews', {reviews});
+    } else {
+      res.status(400).json({message: 'There is not a review that is for that product ID.'});
+      return;
+    }
+  } catch(err) {
+    res.status(500).json(err)
+  }
+});
+
+
+// GET all reviews for a product with a certain ID
+router.get('/review/product/:id', async (req, res) => {
+  try {
+    const reviewData = await Review.findAll({
+      where: {product_id: req.params.id}
+    });
+    if(reviewData) {
+      const reviews = reviewData.map((review) => review.get({plain: true}));
+      res.render('reviews', {reviews});
+    } else {
+      res.status(400).json({message: 'There is not a review that is for that product ID.'});
+      return;
+    }
+  } catch(err) {
+    res.status(500).json(err)
+  }
 });
 
 

@@ -8,8 +8,8 @@ const auth = require('../../utils/Auth');
 // GET all categories.
 router.get('/', async (req, res) => {
   try {
-      const categoryData = await Category.findAll({
-        include: [{ model: Product }], 
+      const categoryData = await Category.findAll({ 
+        include: { model: Product }
       });
       res.status(200).json(categoryData);
       // const category = categoryData.map((category) => category.get({ plain: true }));
@@ -24,16 +24,13 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
       const categoryData = await Category.findByPk(req.params.id, {
-        include: [{ model: Product }], 
+        include: { model: Product }, 
       });
-      if(categoryData) {
-        const category = categoryData.get({ plain: true });
-        // res.render('category', {category});
-        res.status(200).json(categoryData);
-      } else {
+      if(!categoryData) {
         res.status(400).json({message: 'No category with that ID!'});
         return;
-      }    
+      }
+      res.status(200).json(categoryData);   
     } catch(err) {
       res.status(500).json(err)
     }
@@ -49,15 +46,11 @@ router.get('/:category_id/:product_category_id', async (req, res) => {
       include: [
       {model: Product, where: {category_id: req.params.category_id}}]
     });
-    if(categoryData) {
-      //const category = categoryData.map((category) => category.get({plain: true}));
-      //const category = categoryData.get({ plain: true });
-      //res.render('category', {category});
-      res.status(200).json(categoryData);
-    } else {
+    if(!categoryData) {
       res.status(400).json({message: 'No category-product combination with that ID!'});
       return;
     }
+    res.status(200).json(categoryData);
   } catch(err) {
     res.status(500).json(err)
   }
@@ -89,7 +82,7 @@ router.put('/:id', async (req, res) => {
         res.status(404).json({message: 'No category with this ID!'});
         return;
       }
-      res.status(200).json(categoryData);
+      res.status(200).json({message: 'The selected category was updated.'});
     } catch (err) {
       res.status(500).json(err);
     }

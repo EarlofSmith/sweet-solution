@@ -1,0 +1,23 @@
+<h2>
+  <button type="button" class="btn btn-lg py-1 px-2 active" aria-current="page" onclick="history.back()"> > Back to
+    Product</button>
+</h2>
+<div class="row mb-2">
+<!-- Review cards - only displays if there are reviews, else will display standard message l.21 -->
+{{#if reviews}}
+  {{#each reviews as |review|}}
+  <div class="col-md-6">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-muted">{{review.product.product_name}}</strong>
+        <h3 class="mb-0">{{review.user.first_name}} {{review.user.last_name}}</h3>
+        <p class="card-text mb-auto">{{review.review_content}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+  {{else}} 
+  <br>
+  <p class="lead">There are no reviews for this product yet! </p>
+{{/if}}
+</div>
