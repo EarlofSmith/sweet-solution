@@ -1,6 +1,7 @@
 # Sweet Soultions
 
   Application - https://sweet-solution-d664223c597a.herokuapp.com/
+  Redeployed 10-4-2023
 
   ## Table of Contents
   * [Description](#description)
